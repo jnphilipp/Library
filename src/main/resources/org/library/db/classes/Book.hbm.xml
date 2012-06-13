@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="org.library.db.classes">
+	<class name="Book" table="book" schema="PUBLIC">
+		<id name="isbn" type="string" column="isbn">
+			<generator class="identity"/>
+		</id>
+
+		<property name="title" type="string" not-null="true" column="title" />
+		<property name="language" type="string" not-null="true" column="language" />
+		<property name="format" type="string" not-null="true" column="format" />
+		<property name="published" type="date" not-null="true" column="published" />
+		<property name="price" type="float" not-null="true" column="price" />
+		<!--<property name="rezension" type="string" column="rezension" />-->
+		<property name="purchased" type="date" not-null="false" column="purchased" />
+		<property name="read" type="date" not-null="false" column="read" />
+
+		<many-to-one name="publisher" class="Publisher" column="pid" not-null="true" cascade="all" unique="true" />
+		<many-to-one name="author" class="People" column="author" not-null="true" cascade="all" unique="true" />
+
+		<set name="coauthor" table="coauthor" cascade="all">
+			<key column="isbn" />
+			<many-to-many column="pid" class="People" />
+		</set>
+	</class>
+</hibernate-mapping>
