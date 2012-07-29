@@ -1,0 +1,26 @@
+<fieldset class=bookIn>
+	<legend> {{legend}} </legend>
+	{{#image}}
+		<img src="{{path}}" height="300px" alt=" {{title}} " title=" {{title}} " />
+	{{/image}}
+	<form action="?tab=search" method="post" accept-charset="UTF-8" autocomplete="off">
+		<ul>
+			{{#field}}
+				<li>
+					<label>{{label}}:</label>
+					<input type="text" name="{{name}}" id="{{id}}" value="{{value}}" {{#required}}required{{/required}} />
+				</li>
+			{{/field}}
+			{{#button}}
+				<li>
+					<label></label>
+					<input type="submit" name="submit" value="{{button}}" />
+					<input type="hidden" name="bookIn" value="{{bookin}}" />
+				</li>
+			{{/button}}
+			{{#oldIsbn}}
+				<input type="hidden" name="isbn_old" value="{{isbn}}" />
+			{{/oldIsbn}}
+		</ul>
+	</form>
+</fieldset>

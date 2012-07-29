@@ -1,0 +1,21 @@
+{{#book}}
+	{{#TemplateBookOverview}}
+		{{>TemplateBookOverview}}
+	{{/TemplateBookOverview}}
+	<article class="book">
+		<img src="{{image}}" alt=" {{ititle}} " title=" {{ititle}} " />
+		<a href="{{href}}" style="float: right;">X</a>
+		<h2>{{title}}</h2>
+		<table>
+			{{#author}}
+				<tr><th>{{th}}</th><td>{{author}}{{#coauthor}}, {{coauthors}}{{/coauthor}}&nbsp;&nbsp;<a href="?tab=search&amp;search={{author}}&amp;sort=author">&rarr;</a></td></tr>
+			{{/author}}
+			{{#line}}
+				<tr><th>{{th}}</th><td>{{td}}</td></tr>
+			{{/line}}
+			{{#update}}
+				<tr><th></th><td><a href="?tab=update&amp;b={{isbn}}">{{update}}</a></td></tr>
+			{{/update}}
+		</table>
+	</article>
+{{/book}}

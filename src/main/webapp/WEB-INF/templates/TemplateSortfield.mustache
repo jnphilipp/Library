@@ -1,0 +1,9 @@
+{{#sortfield}}
+	<a class="sort">{{sort}}<article>
+		<table>
+			{{#line}}
+			<tr><th>{{th}}<th><td>{{#down}}<a href="?tab={{tab}}{{#showsearch}}&amp;search={{search}}{{/showsearch}}&amp;sort={{downsort}}">&darr;down</a>{{/down}}{{^down}}&darr;down{{/down}}</td><td>{{#up}}<a href="?tab={{tab}}{{#showsearch}}&amp;search={{search}}{{/showsearch}}&amp;sort={{upsort}}">&uarr;up</a>{{/up}}{{^up}}&uarr;up{{/up}}</td></tr>
+			{{/line}}
+		</table>
+	</article></a>
+{{/sortfield}}

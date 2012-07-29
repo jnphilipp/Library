@@ -1,29 +1,55 @@
-<%@page import="org.library.db.classes.Book"%>
+<%-- 
+    Document   : index
+    Created on : Jun 13, 2012, 12:05:10 AM
+    Author     : J. Nathanael Philipp
+--%>
+
+<%@page import="org.library.templates.TemplateSite"%>
+<%@page import="org.library.templates.tabs.TemplateStatisticsTab"%>
+<%@page import="org.library.templates.tabs.TemplateReadTab"%>
+<%@page import="org.library.templates.tabs.TemplateLibraryTab"%>
+<%@page import="org.library.templates.tabs.TemplateWishListTab"%>
+<%@page import="org.library.SiteHandling.RequestHandling"%>
+<%@page import="org.library.templates.tabs.TemplateAddTab"%>
+<%@page import="org.library.templates.tabs.TemplateUpdateTab"%>
+<%@page import="org.library.templates.tabs.TemplateSUBTab"%>
+<%@page import="org.library.templates.tabs.TemplateSearchTab"%>
+<%@page import="org.library.Functions"%>
+<%@page import="java.io.File"%>
 <%@page import="java.util.List"%>
-<%@page import="org.library.util.HibernateUtil"%>
 <%@page import="org.hibernate.Session"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-   "http://www.w3.org/TR/html4/loose.dtd">
+<%@page contentType="text/html charset=utf-8" pageEncoding="UTF-8"%>
 
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <h1>Hello World!</h1>
-				<%
-				Session s = HibernateUtil.getSessionFactory().openSession();
-				s.beginTransaction();
+<%
+request.setCharacterEncoding("UTF-8");
+response.setCharacterEncoding("UTF-8");
+Functions.setServletContext(getServletContext());
 
-				List re = s.createQuery("from Book").setMaxResults(10).list();
+String tab = "", search = "", book = "", sort = "", addURL = "", message = "";
 
-				for ( Book b : (List<Book>) re )
-					out.println("<p>" + b.toShortString() + "</p>");
+if ( request.getParameter("tab") != null )
+	tab = request.getParameter("tab");
 
-				s.getTransaction().commit();
-				s.close();
-				%>
-    </body>
-</html>
+if ( request.getParameter("search") != null )
+	search = request.getParameter("search");
+
+if ( request.getParameter("b") != null )
+	book = request.getParameter("b");
+
+if ( request.getParameter("sort") != null )
+	sort = request.getParameter("sort");
+
+if ( request.getParameter("amazon") != null )
+	addURL = request.getParameter("amazon");
+
+message = RequestHandling.doRequestHandling(request, response, getServletContext());
+
+if ( request.getParameter("bookIn") != null && (request.getParameter("bookIn").equals("add") || request.getParameter("bookIn").equals("update")) ) {
+	search = request.getParameter("isbn");
+	book = request.getParameter("isbn");
+}
+
+TemplateSite ts = new TemplateSite(tab, book, sort, search, message, addURL);
+out.println(ts.generateHTMLCode());
+
+%>

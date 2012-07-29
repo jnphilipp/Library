@@ -1,0 +1,320 @@
+/* 
+    Document   : main
+    Created on : Jun 7, 2012, 12:25:03 PM
+    Author     : J. Nathanael Philipp
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+@font-face { font-family: JaneAusten;
+	src: local(JaneAusten),
+		url(JaneAusten.ttf) format(truetype);}
+
+header, footer, nav, article, aside { display:block;}
+body { background: white;}
+
+h1 { font-family: JaneAusten;
+	text-align: center;
+	font-size: 30pt;
+	font-weight: bold;
+	color: black;}
+
+h2 { font-family: JaneAusten;
+	text-align: center;
+	font-size: 20pt;
+	color: black;}
+
+a { font-family: monospace;
+	font-size: 10pt;
+	font-weight: bold;
+	color: #777;
+	text-decoration: none;}
+
+a:hover { color: #333;
+	font-weight: bold;
+	text-decoration: none;}
+
+div { font-family: monospace;
+	font-size: 10pt;
+	font-weight: normal;
+	color: black;}
+
+article.book table { margin: 0 auto;}
+
+th { text-align: left;
+	font-weight: bold;
+	color: black;
+	padding-right: 2em;}
+
+td { text-align: left;
+	font-weight: normal;
+	color: black;}
+
+small { font-family: monospace;
+	color: black;}
+
+fieldset { font-family: monospace;
+	font-size: 10pt;
+	font-weight: normal;
+	-webkit-border-radius: 7px;
+	-moz-border-radius: 7px;
+	border-radius: 7px;
+	border: 1px solid rgba(106, 105, 106, 0.6);}
+
+fieldset legend { margin-left: 1em;}
+
+
+
+/*####   Tabs   ####*/
+
+#tabs { margin: 0 !important;
+	padding: 0;
+	height: 30px;
+	border-bottom: 1px solid #666;}
+
+#tabs li { float: left;
+	padding: 0;
+	margin: 0;
+	list-style-type: none;}
+
+#tabs a { float: left;
+	font-size: 13px;
+	display: block;
+	padding: 5px 30px;
+	text-decoration: none;
+	border: 1px solid #666;
+	border-bottom: 0px;
+	height: 18px;
+	background-color: #efefef;
+	color: #777;
+	margin-right: 2px;
+	position: relative;
+	top: 1px;
+	outline: 0;
+	-o-border-radius: 4px 4px 0 0;
+	-icab-border-radius: 4px 4px 0 0;
+	-khtml-border-radius: 4px 4px 0 0;
+	-moz-border-radius: 4px 4px 0 0;
+	-webkit-border-radius: 4px 4px 0 0;
+	border-radius: 4px 4px 0 0;}
+
+#tabs a:hover { background-color: #F7F7F7;
+	color: #333;}
+
+#tabs a.current { background-color: #EEE;
+	border-bottom: 1px solid #EEE;
+	color: #000;
+	cursor: default;}
+
+#panes div.tab { border: 1px solid #666;
+	border-width: 0 1px 1px 1px;
+	min-height: 150px;
+	padding: 15px 20px;
+	background-color: #EEE;}
+
+
+
+/*####   Overview   ####*/
+
+a.book,
+a.overview { z-index: 1;
+	margin: 3px 0px;}
+
+a.book img,
+a.overview img { border: 2px solid gray;}
+a.book:hover img,
+a.overview:hover img { border: 2px solid #303030;}
+a.overview article { display: block;
+	position: fixed;
+	left: -9999px;
+	width: 0;
+	opacity: 0;
+	visibility: hidden;
+	-o-box-shadow: 5px 5px 2px rgba(106, 105, 106, 0.5);
+	-icab-box-shadow: 5px 5px 2px rgba(106, 105, 106, 0.5);
+	-khtml-box-shadow: 5px 5px 2px rgba(106, 105, 106, 0.5);
+	-moz-box-shadow: 0px 0px 10px 3px rgba(106, 105, 106, 0.5);
+	-webkit-box-shadow: 0px 0px 10px 3px rgba(106, 105, 106, 0.5);
+	box-shadow: 0px 0px 10px 3px rgba(106, 105, 106, 0.5);
+	-o-border-radius: 8px;
+	-icab-border-radius: 8px;
+	-khtml-border-radius: 8px;
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	border-radius: 8px;
+	-webkit-transition: visibility 0s ease-in-out 0.2s, opacity 0.2s ease-in-out;
+	-moz-transition: visibility 0s ease-in-out 0.2s, opacity 0.2s ease-in-out;
+	transition: visibility 0s ease-in-out 0.2s, opacity 0.2s ease-in-out;}
+
+a.overview:hover article { top: 1em;
+	left: 50%;
+	width: 36em;
+	margin-left: -18em;
+	padding: 8px;
+	border: 1px solid rgba(93, 87, 98, 0.6);
+	background: rgba(255, 255, 255, 0.9);
+	opacity: 1.0;
+	visibility: visible;
+	z-index: 2;}
+
+a.overview th { width: 9em;}
+
+article.book { display: block;
+	position: fixed;
+	top: 1em;
+	left: 50%;
+	width: 66em;
+	margin-left: -33em;
+	padding: 8px;
+	-o-box-shadow: 5px 5px 2px rgba(106, 105, 106, 0.5);
+	-icab-box-shadow: 5px 5px 2px rgba(106, 105, 106, 0.5);
+	-khtml-box-shadow: 5px 5px 2px rgba(106, 105, 106, 0.5);
+	-moz-box-shadow: 0px 0px 10px 3px rgba(106, 105, 106, 0.5);
+	-webkit-box-shadow: 0px 0px 10px 3px rgba(106, 105, 106, 0.5);
+	box-shadow: 0px 0px 10px 3px rgba(106, 105, 106, 0.5);
+	-o-border-radius: 8px;
+	-icab-border-radius: 8px;
+	-khtml-border-radius: 8px;
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	border-radius: 8px;
+	border: 1px solid rgba(93, 87, 98, 0.6);
+	background: rgba(255, 255, 255, 0.9);}
+
+a.overview article img { width: auto;
+	min-height: 200px;
+	max-height: 250px;
+	max-width: 200px;
+	border: 1px solid darkgray;
+	float: left;
+	margin-right: 1em;}
+
+article.book img { width: auto;
+	min-height: 400px;
+	max-height: 490px;
+	max-width: 400px;
+	border: 1px solid darkgray;
+	float: left;
+	margin-right: 1em;}
+
+
+
+/*####   Sort   ####*/
+
+a.sort { z-index: 1;
+	margin: 3px 0px;
+	display: block;
+	position: relative;
+	float: right;}
+
+a.sort article { display: block;
+	position: absolute;
+	left: -9999px;
+	width: 0;
+	opacity: 0;
+	visibility: hidden;
+	-o-box-shadow: 5px 5px 2px rgba(106, 105, 106, 0.5);
+	-icab-box-shadow: 5px 5px 2px rgba(106, 105, 106, 0.5);
+	-khtml-box-shadow: 5px 5px 2px rgba(106, 105, 106, 0.5);
+	-moz-box-shadow: 0px 0px 10px 3px rgba(106, 105, 106, 0.5);
+	-webkit-box-shadow: 0px 0px 10px 3px rgba(106, 105, 106, 0.5);
+	box-shadow: 0px 0px 10px 3px rgba(106, 105, 106, 0.5);
+	-o-border-radius: 8px;
+	-icab-border-radius: 8px;
+	-khtml-border-radius: 8px;
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	border-radius: 8px;
+	-webkit-transition: visibility 0s ease-in-out 0.2s, opacity 0.2s ease-in-out;
+	-moz-transition: visibility 0s ease-in-out 0.2s, opacity 0.2s ease-in-out;
+	transition: visibility 0s ease-in-out 0.2s, opacity 0.2s ease-in-out;}
+
+a.sort:hover article { top: -1em;
+	left: -18em;
+	width: 20em;
+	height : 11em;
+	padding: 8px;
+	border: 1px solid rgba(93, 87, 98, 0.6);
+	background: rgba(255, 255, 255, 0.9);
+	opacity: 1.0;
+	visibility: visible;
+	z-index: 2;}
+
+
+
+/*###   book fields   ###*/
+
+fieldset.amazon ul { list-style: none;}
+fieldset.bookIn ul { list-style: none;
+	display: table;}
+
+fieldset.bookIn li { display: table-row;
+	margin-bottom: 5px;}
+
+fieldset.amazon label { margin-right: 5px;}
+fieldset.bookIn label { display: table-cell;
+	width: 13em;}
+
+fieldset.bookIn img { float: left;
+	border: 1px solid black;
+	margin-left: 3em;
+	margin-top: 1.5em;}
+
+input[type=text] { display: table-cell;
+	border: 1px solid rgba(106, 105, 106, 0.6);
+	font-family: monospace;
+	width: 40em;
+	margin-bottom: 2px;}
+
+fieldset.amazon input[type=text] { width: 85%;}
+
+input[type=submit] { font-family: monospace;
+	font-size: 11pt;
+	font-weight: bold;
+	text-align: center;
+	border: 1px solid #666;
+	background: #efefef;
+	color: #777;
+	height: 29px;
+	line-height: 29px;}
+
+fieldset.bookIn input[type=submit] { padding-left: 2em;
+	padding-right: 2em;}
+
+input[type=submit]:hover { background: #F7F7F7;
+	color: #333;
+	font-weight: bold;}
+
+
+
+/*###   message   ###*/
+
+article.message { display: block;
+z-index: 1;
+position: fixed;
+top: 0.5em;
+left: 50%;
+margin-left: -10em;
+width: 20em;
+padding: 8px;
+border: 1px solid rgba(93, 87, 98, 0.6);
+background: rgba(150, 150, 150, 0.9);
+-webkit-box-shadow: 0px 0px 5px 1px rgba(106, 105, 106, 0.5);
+-moz-box-shadow: 0px 0px 5px 1px rgba(106, 105, 106, 0.5);
+box-shadow: 0px 0px 5px 1px rgba(106, 105, 106, 0.5);
+-o-border-radius: 8px;
+-icab-border-radius: 8px;
+-khtml-border-radius: 8px;
+-moz-border-radius: 8px;
+-webkit-border-radius: 8px;
+border-radius: 8px;}
+
+article.message p { text-align: center;}
+
+
+
+/*### search field ###*/
+
+fieldset.search ul { list-style: none;}
+fieldset.search input[type=text] { width: 80%;}
+fieldset.search label { margin-right: 0.5em;}

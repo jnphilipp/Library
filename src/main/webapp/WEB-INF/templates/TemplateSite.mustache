@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="de">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="stylesheet" href="./css/main.css" />
+		<link rel="stylesheet" href="./css/jquery.ui.all.css" />
+		<link rel="shortcut icon" href="./images/icon.jpg" />
+		<title>Bibliothek</title>
+		<script type="text/javascript" src="./js/jquery-1.7.2.js"></script>
+		<script type="text/javascript" src="./js/jquery.ui.core.js"></script>
+		<script type="text/javascript" src="./js/jquery.ui.position.js"></script>
+		<script type="text/javascript" src="./js/jquery.ui.widget.js"></script>
+		<script type="text/javascript" src="./js/jquery.ui.autocomplete.js"></script>
+		<script type="text/javascript" src="./js/jquery.ui.datepicker.js"></script>
+		<script>
+			$(function() {
+				function split( val ) {
+					return val.split( /,\s*/ );
+				}
+				function extractLast( term ) {
+					return split( term ).pop();
+				}
+
+				$("#search").autocomplete({source: "./autocomplete/search.jsp"});
+				$("#binding").autocomplete({source: "./autocomplete/binding.jsp"});
+				$("#language").autocomplete({source: "./autocomplete/language.jsp"});
+				$("#author").autocomplete({source: "./autocomplete/author.jsp"});
+				$("#publisher").autocomplete({source: "./autocomplete/publisher.jsp"});
+				$("#coauthor").autocomplete({source: "./autocomplete/author.jsp"});
+				$("#published").datepicker({dateFormat: "dd.mm.yy"});
+				$("#purchased").datepicker({dateFormat: "dd.mm.yy"});
+				$("#read").datepicker({dateFormat: "dd.mm.yy"});
+			});
+		</script>
+	</head>
+	<body>
+		{{#message}}
+			<article class="message"><p>{{messagetext}}</p></article>
+		{{/message}}
+		<ul id="tabs">
+			{{#tab}}
+				<li><a {{#current}}class="current"{{/current}} href="{{href}}">{{name}}</a></li>
+			{{/tab}}
+		</ul>
+		<div id="panes">
+			{{#pane}}
+				{{#TemplateBookTabs}}
+					{{>TemplateBookTabs}}
+				{{/TemplateBookTabs}}
+				{{#TemplateStatisticsTab}}
+					{{>TemplateStatisticsTab}}
+				{{/TemplateStatisticsTab}}
+				{{#TemplateAddUpdateTab}}
+					{{>TemplateAddUpdateTab}}
+				{{/TemplateAddUpdateTab}}
+			{{/pane}}
+		</div>
+	</body>
+</html>
