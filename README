@@ -1,0 +1,56 @@
+  Library
+
+An Open Source tool to manage your books.
+==================================================
+
+I.    Description
+II.   Requirements
+III.  Compiling Library
+IV.   Start Library
+V.    Troubleshooting
+VI.   Help, Feedback & Bug Reports
+VII.  About
+
+
+I.    Description
+==================================================
+I first used Alexandria (http://alexandria.rubyforge.org/)
+for manage my book collection. Then I used a
+spreadsheet and a Java program to generate  a HTML
+file. This work quiet well for some time but it's
+no way to manage 1000 or more books. So I began
+this project.
+Basically it's a webfrontend with a database to
+store the book information.
+
+II.   Requirements
+==================================================
+You need an Java Version 1.7.0_03 or later, an
+Apache Tomcat 7.0.14.0 or later. To compile you
+need Maven 2. Also you need a database. Currently
+Hibernate is set up with a PostgreSQL 9.1. To set
+it up use the commands from SQLCommands-file.
+
+III.  Compiling Library
+==================================================
+To compile run: mvn compile
+
+IV.   Start Library
+==================================================
+I included a Tomcat Server within the pom file, so
+that you can run it with: mvn tomcat7:run.
+
+V.    Troubleshooting
+==================================================
+In need of help or for more information feel free
+to send a mail to jnphilipp@gmail.com.
+
+VI.   Help, Feedback & Bug Reports
+==================================================
+For Help, Feedback or Bug Reports, send a mail to
+jnphilipp@gmail.com.
+
+
+VII.  About
+==================================================
+Content is (C) 2012 J. Nathanael Philipp
