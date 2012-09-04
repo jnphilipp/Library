@@ -6,17 +6,3 @@ CREATE TABLE people (id SERIAL PRIMARY KEY, firstnames TEXT NOT NULL, lastname T
 CREATE TABLE book (isbn TEXT PRIMARY KEY, title TEXT NOT NULL, language TEXT REFERENCES language(name), binding TEXT REFERENCES binding(binding), price REAL NOT NULL, published DATE NOT NULL, publisher TEXT REFERENCES publisher(name), author SERIAL REFERENCES people(id), purchased DATE DEFAULT NULL, read DATE DEFAULT NULL);
 
 CREATE TABLE coauthor (isbn TEXT REFERENCES book(isbn), pid SERIAL REFERENCES people(id));
-
-
-
-
-INSERT INTO people VALUES (DEFAULT, 'Lia', 'Habel');
-INSERT INTO publisher VALUES ('Del Rey');
-INSERT INTO language VALUES ('Englisch');
-INSERT INTO binding VALUES ('Gebundene Ausgabe');
-INSERT INTO book VALUES ('9780345523310', 'Dearly, Departed', 'Englisch', 'Gebundene Ausgabe', 12.50, '2011-10-18', 'Del Rey', 1, '2012-05-25');
-
-INSERT INTO people VALUES (DEFAULT, 'Kalayna', 'Price');
-INSERT INTO publisher VALUES ('Roc Books');
-INSERT INTO binding VALUES ('Taschenbuch');
-INSERT INTO book VALUES ('9780451464590', 'Grave Memory: An Alex Craft Novel', 'Englisch', 'Taschenbuch', 5.9, '2012-07-03', 'Roc Books', 2);
