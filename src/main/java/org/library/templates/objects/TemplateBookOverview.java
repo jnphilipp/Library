@@ -28,8 +28,12 @@ public class TemplateBookOverview extends TemplatesObject {
 		super(tab, sort);
 	}
 
-	public TemplateBookOverview(String tab, String sort, String search) {
-		super(tab, sort, search);
+	public TemplateBookOverview(String tab, String sort, String site) {
+		super(tab, sort, site);
+	}
+
+	public TemplateBookOverview(String tab, String sort, String site, String search) {
+		super(tab, sort, site, search);
 	}
 
 	/*@Override
@@ -75,6 +79,6 @@ public class TemplateBookOverview extends TemplatesObject {
 	}
 
 	private String getLink(String isbn) {
-		return "?tab=" + this.tab + (search.equals("") ? "" : "&amp;search=" + this.search) + (this.sort.equals("") ? "" :  "&amp;sort=" + this.sort) + "&amp;b=" + isbn + "#" + isbn;
+		return "?tab=" + this.tab + (search.equals("") ? "" : "&amp;search=" + this.search) + (this.site.equals("") ? "" : "&amp;site=" + this.site) + (this.sort.equals("") ? "" :  "&amp;sort=" + this.sort) + "&amp;b=" + isbn + "#" + isbn;
 	}
 }

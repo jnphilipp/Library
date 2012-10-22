@@ -11,7 +11,7 @@
 		url(JaneAusten.ttf) format(truetype);}
 
 header, footer, nav, article, aside { display:block;}
-body { background: white;}
+body { background: #F0F0F0;}
 
 h1 { font-family: JaneAusten;
 	text-align: center;
@@ -65,55 +65,6 @@ fieldset legend { margin-left: 1em;}
 
 
 
-/*####   Tabs   ####*/
-
-#tabs { margin: 0 !important;
-	padding: 0;
-	height: 30px;
-	border-bottom: 1px solid #666;}
-
-#tabs li { float: left;
-	padding: 0;
-	margin: 0;
-	list-style-type: none;}
-
-#tabs a { float: left;
-	font-size: 13px;
-	display: block;
-	padding: 5px 30px;
-	text-decoration: none;
-	border: 1px solid #666;
-	border-bottom: 0px;
-	height: 18px;
-	background-color: #efefef;
-	color: #777;
-	margin-right: 2px;
-	position: relative;
-	top: 1px;
-	outline: 0;
-	-o-border-radius: 4px 4px 0 0;
-	-icab-border-radius: 4px 4px 0 0;
-	-khtml-border-radius: 4px 4px 0 0;
-	-moz-border-radius: 4px 4px 0 0;
-	-webkit-border-radius: 4px 4px 0 0;
-	border-radius: 4px 4px 0 0;}
-
-#tabs a:hover { background-color: #F7F7F7;
-	color: #333;}
-
-#tabs a.current { background-color: #EEE;
-	border-bottom: 1px solid #EEE;
-	color: #000;
-	cursor: default;}
-
-#panes div.tab { border: 1px solid #666;
-	border-width: 0 1px 1px 1px;
-	min-height: 150px;
-	padding: 15px 20px;
-	background-color: #EEE;}
-
-
-
 /*####   Overview   ####*/
 
 a.book,
@@ -146,7 +97,7 @@ a.overview article { display: block;
 	-moz-transition: visibility 0s ease-in-out 0.2s, opacity 0.2s ease-in-out;
 	transition: visibility 0s ease-in-out 0.2s, opacity 0.2s ease-in-out;}
 
-a.overview:hover article { top: 1em;
+a.overview:hover article { top: 3em;
 	left: 50%;
 	width: 36em;
 	margin-left: -18em;
@@ -155,13 +106,13 @@ a.overview:hover article { top: 1em;
 	background: rgba(255, 255, 255, 0.9);
 	opacity: 1.0;
 	visibility: visible;
-	z-index: 2;}
+	z-index: 3;}
 
 a.overview th { width: 9em;}
 
 article.book { display: block;
 	position: fixed;
-	top: 1em;
+	top: 5em;
 	left: 50%;
 	width: 66em;
 	margin-left: -33em;
@@ -182,15 +133,13 @@ article.book { display: block;
 	background: rgba(255, 255, 255, 0.9);}
 
 a.overview article img { width: auto;
-	min-height: 200px;
 	max-height: 250px;
-	max-width: 200px;
+	max-width: 180px;
 	border: 1px solid darkgray;
 	float: left;
 	margin-right: 1em;}
 
 article.book img { width: auto;
-	min-height: 400px;
 	max-height: 490px;
 	max-width: 400px;
 	border: 1px solid darkgray;
@@ -202,7 +151,7 @@ article.book img { width: auto;
 /*####   Sort   ####*/
 
 a.sort { z-index: 1;
-	margin: 3px 0px;
+	margin: 3px 10px 3px 0px;
 	display: block;
 	position: relative;
 	float: right;}
@@ -230,9 +179,9 @@ a.sort article { display: block;
 	transition: visibility 0s ease-in-out 0.2s, opacity 0.2s ease-in-out;}
 
 a.sort:hover article { top: -1em;
-	left: -18em;
-	width: 20em;
-	height : 11em;
+	left: -17.5em;
+	width: 19em;
+	height : 10.2em;
 	padding: 8px;
 	border: 1px solid rgba(93, 87, 98, 0.6);
 	background: rgba(255, 255, 255, 0.9);
@@ -240,18 +189,20 @@ a.sort:hover article { top: -1em;
 	visibility: visible;
 	z-index: 2;}
 
+a.sort td,
+a.sort td a { font-size: 9pt;}
+a.sort td { padding: 0.1em 1em;}
+
 
 
 /*###   book fields   ###*/
 
-fieldset.amazon ul { list-style: none;}
 fieldset.bookIn ul { list-style: none;
 	display: table;}
 
 fieldset.bookIn li { display: table-row;
 	margin-bottom: 5px;}
 
-fieldset.amazon label { margin-right: 5px;}
 fieldset.bookIn label { display: table-cell;
 	width: 13em;}
 
@@ -261,38 +212,49 @@ fieldset.bookIn img { float: left;
 	margin-top: 1.5em;}
 
 input[type=text] { display: table-cell;
-	border: 1px solid rgba(106, 105, 106, 0.6);
-	font-family: monospace;
+	background: #fcfcfc;
+	border: 1px solid #b1b1b1;
+	color: black;
+	padding: 4px 15px 4px 15px;
 	width: 40em;
-	margin-bottom: 2px;}
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	text-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+	-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
+	-moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
+	-webkit-transition: all 0.7s ease 0s;
+	-moz-transition: all 0.7s ease 0s;
+	-o-transition: all 0.7s ease 0s;
+	transition: all 0.7s ease 0s;}
 
-fieldset.amazon input[type=text] { width: 85%;}
-
-input[type=submit] { font-family: monospace;
-	font-size: 11pt;
-	font-weight: bold;
-	text-align: center;
-	border: 1px solid #666;
-	background: #efefef;
-	color: #777;
-	height: 29px;
-	line-height: 29px;}
-
-fieldset.bookIn input[type=submit] { padding-left: 2em;
-	padding-right: 2em;}
-
-input[type=submit]:hover { background: #F7F7F7;
-	color: #333;
-	font-weight: bold;}
+button { overflow: visible;
+	border: 1px solid #b1b1b1;
+	border-left-width: 0px;
+	padding: 0;
+	cursor: pointer;
+	height: 27px;
+	width: 110px;
+	color: #fff;
+	text-transform: uppercase;
+	background: #777;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	text-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+	-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
+	-moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;}
 
 
 
 /*###   message   ###*/
 
 article.message { display: block;
-z-index: 1;
+z-index: 10;
 position: fixed;
-top: 0.5em;
+top: 5em;
 left: 50%;
 margin-left: -10em;
 width: 20em;
@@ -313,8 +275,185 @@ article.message p { text-align: center;}
 
 
 
-/*### search field ###*/
+/*### navigation ###*/
 
-fieldset.search ul { list-style: none;}
-fieldset.search input[type=text] { width: 80%;}
-fieldset.search label { margin-right: 0.5em;}
+nav { position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	background: url("../images/nav_background.png");
+	z-index: 2;}
+
+nav ul { margin: 0 auto;
+	list-style: none;}
+
+nav ul li { float: left;}
+nav ul li a { display: block;
+	margin-right: 20px;
+	width: 140px;
+	font-size: 14px;
+	line-height: 44px;
+	text-align: center;
+	text-decoration: none;
+	color: #777;}
+
+nav ul li a:hover { color: #fff;}
+nav ul li.selected a { color: #fff;}
+
+
+
+/*### search box ###*/
+
+#search_box { display: block; position: relative;
+	left: 50%;
+	width: 0;}
+
+#search { background: url('../images/search-white.png') 6px center no-repeat #fcfcfc;
+	border: 1px solid #b1b1b1;
+	color: black;
+	width: 400px;
+	margin-left: -200px;
+	padding: 6px 15px 6px 35px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	text-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+	-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
+	-moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
+	-webkit-transition: all 0.7s ease 0s;
+	-moz-transition: all 0.7s ease 0s;
+	-o-transition: all 0.7s ease 0s;
+	transition: all 0.7s ease 0s;}
+
+#search:focus { margin-left: -275px;
+	width: 550px;
+	outline: 0;}
+
+
+
+/*### main content ###*/
+
+#main_content { margin-left: 3em;
+	margin-right: 3em;
+	text-align: justify;
+	text-align-last: justify;}
+
+#main_content:after { content: " __________________________________________________________";
+	line-height: 0;
+	visibility: hidden;}
+
+
+
+/*### left/right arrows ###*/
+
+.arrow-e,
+.arrow-w { border-style: dashed;
+	border-color: transparent;
+	border-width: 0.50em;
+	display: -moz-inline-box;
+	display: inline-block;
+	font-size: 50px;
+	height: 0;
+	line-height: 0;
+	vertical-align: middle;
+	width: 0;}
+
+.arrow-e { border-left-width: 0.4em;
+	border-left-style: solid;
+	border-left-color: #777;}
+
+.arrow-w { border-right-width: 0.4em;
+	border-right-style: solid;
+	border-right-color: #777/*#666*/;}
+
+.arrow-e:hover { border-left-color: #333;}
+.arrow-w:hover { border-right-color: #333;}
+
+
+
+/*### amazob box ###*/
+
+input:focus,
+#search_box input:focus,
+#amazon_box input:focus { outline: 0;
+	border-color: #666;}
+
+input::-webkit-input-placeholder,
+#search_box input::-webkit-input-placeholder,
+#amazon_box input::-webkit-input-placeholder { color: #999;}
+
+input:-moz-placeholder,
+#search_box input:-moz-placeholder,
+#amazon_box input:-moz-placeholder { color: #999;}
+
+input:-ms-input-placeholder,
+#search_box input:-ms-input-placeholder,
+#amazon_box input:-ms-input-placeholder { color: #999;}
+
+#amazon_box:before, #amazon_box:after { content: "";
+	display: table; }
+
+#amazon_box:after { clear: both;}
+#amazon_box { zoom: 1;}
+#amazon_box { width: 671px;
+	margin: 1em auto 1em auto;}
+
+#amazon_box input { background: #fcfcfc;
+	border: 1px solid #b1b1b1;
+	border-right-width: 0;
+	color: black;
+	padding: 4px 15px 4px 15px;
+	width: 530px;
+	float: left;
+	-webkit-border-radius: 5px 0 0 5px;
+	-moz-border-radius: 5px 0 0 5px;
+	border-radius: 5px 0 0 5px;
+	text-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+	-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
+	-moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
+	-webkit-transition: all 0.7s ease 0s;
+	-moz-transition: all 0.7s ease 0s;
+	-o-transition: all 0.7s ease 0s;
+	transition: all 0.7s ease 0s;}
+
+#amazon_box button { overflow: visible;
+	position: relative;
+	float: right;
+	border: 1px solid #b1b1b1;
+	border-left-width: 0px;
+	padding: 0;
+	cursor: pointer;
+	height: 27px;
+	width: 110px;
+	color: #fff;
+	text-transform: uppercase;
+	background: #777;
+	-webkit-border-radius: 0 5px 5px 0;
+	-moz-border-radius: 0 5px 5px 0;
+	border-radius: 0 5px 5px 0;
+	text-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+	-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
+	-moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;}
+
+button:hover,
+#amazon_box button:hover { background: #333;}
+#amazon_box button:active,
+#amazon_box button:focus{ background: #222;
+	outline: 0;}
+
+#amazon_box button:before { content: '';
+	position: absolute;
+	border-width: 8px 8px 8px 0;
+	border-style: solid solid solid none;
+	border-color: transparent #777 transparent;
+	top: 5px;
+	left: -6px;}
+
+#amazon_box button:hover:before{ border-right-color: #333;}
+#amazon_box button:focus:before,
+#amazon_box button:active:before{ border-right-color: #222;}
+button::-moz-focus-inner { border: 0;
+    padding: 0;}

@@ -14,8 +14,8 @@ import java.util.List;
 import org.hibernate.Session;
 import org.library.Functions;
 import org.library.mustache.MustacheObject;
-import org.library.mustache.MustacheStatisticsTab;
-import org.library.templates.TemplatesTabs;
+import org.library.mustache.MustacheStatisticsContent;
+import org.library.templates.TemplatesContent;
 import org.library.util.HibernateUtil;
 
 /**
@@ -23,7 +23,7 @@ import org.library.util.HibernateUtil;
  * @author J. Nathanael Philipp
  * @version 1.0
  */
-public class TemplateStatisticsTab extends TemplatesTabs {
+public class TemplateStatisticsContent extends TemplatesContent {
 	@Override
 	public String generateHTMLCode() {
 		Mustache mustache = new DefaultMustacheFactory(Functions.getMustacheTemplateDirectory()).compile("TemplateStatistcisTab.mustache");
@@ -36,7 +36,7 @@ public class TemplateStatisticsTab extends TemplatesTabs {
 
 	@Override
 	public MustacheObject generateMustacheObject() {
-		MustacheStatisticsTab statistics = new MustacheStatisticsTab();
+		MustacheStatisticsContent statistics = new MustacheStatisticsContent();
 
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		session.beginTransaction();

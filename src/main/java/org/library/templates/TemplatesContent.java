@@ -12,19 +12,26 @@ import org.library.mustache.MustacheObject;
  * @author J. Nathanael Philipp
  * @version 1.0
  */
-public abstract class TemplatesTabs {
+public abstract class TemplatesContent {
 	protected String book = "";
 	protected String sort = "";
+	protected String site = "0";
 
-	public TemplatesTabs() {}
+	public TemplatesContent() {}
 
-	public TemplatesTabs(String book) {
+	public TemplatesContent(String book) {
 		this.book = book;
 	}
 
-	public TemplatesTabs(String book, String sort) {
+	public TemplatesContent(String book, String sort) {
 		this.book = book;
 		this.sort = sort;
+	}
+
+	public TemplatesContent(String book, String sort, String site) {
+		this.book = book;
+		this.sort = sort;
+		this.site = site;
 	}
 
 	/**
@@ -53,6 +60,20 @@ public abstract class TemplatesTabs {
 	 */
 	public void setSort(String sort) {
 		this.sort = sort;
+	}
+
+	/**
+	 * @return the site
+	 */
+	public String getSite() {
+		return this.site;
+	}
+
+	/**
+	 * @param site the site to set
+	 */
+	public void setSite(String site) {
+		this.site = site;
 	}
 
 	public abstract String generateHTMLCode();

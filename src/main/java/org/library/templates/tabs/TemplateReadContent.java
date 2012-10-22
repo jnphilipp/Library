@@ -13,7 +13,7 @@ import org.library.Functions;
 import org.library.db.hibernate.classes.Book;
 import org.library.mappings.ReadMapping;
 import org.library.mustache.*;
-import org.library.templates.TemplatesTabs;
+import org.library.templates.TemplatesContent;
 import org.library.templates.objects.TemplateBook;
 import org.library.templates.objects.TemplateBookOverview;
 import org.library.templates.objects.TemplateSiteFunctions;
@@ -23,15 +23,19 @@ import org.library.templates.objects.TemplateSiteFunctions;
  * @author J. Nathanael Philipp
  * @version 1.0
  */
-public class TemplateReadTab extends TemplatesTabs {
-	public TemplateReadTab() {}
+public class TemplateReadContent extends TemplatesContent {
+	public TemplateReadContent() {}
 
-	public TemplateReadTab(String book) {
+	public TemplateReadContent(String book) {
 		super(book);
 	}
 
-	public TemplateReadTab(String book, String sort) {
+	public TemplateReadContent(String book, String sort) {
 		super(book, (sort.equals("") ? "dread" : sort));
+	}
+
+	public TemplateReadContent(String book, String sort, String site) {
+		super(book, (sort.equals("") ? "dread" : sort), site);
 	}
 
 	@Override
@@ -46,17 +50,23 @@ public class TemplateReadTab extends TemplatesTabs {
 
 	@Override
 	public MustacheObject generateMustacheObject() {
-		MustacheBookTabs read = new MustacheBookTabs();
+		MustacheBookContent read = new MustacheBookContent();
 		TemplateSiteFunctions tsf = new TemplateSiteFunctions("read", this.sort);
-		TemplateBookOverview tbo = new TemplateBookOverview("read", this.sort);
-		TemplateBook tb = new TemplateBook("read", this.sort);
-		read.setTemplateSortfield((MustacheSortfield)tsf.generateMustacheObject("sortfield"));
+		TemplateBookOverview tbo = new TemplateBookOverview("read", this.sort, this.site);
+		TemplateBook tb = new TemplateBook("read", this.sort, this.site);
+		//read.setTemplateSortfield((MustacheSortfield)tsf.generateMustacheObject("sortfield"));
+		read.setLeft_arrow(!this.site.equals("0"));
+		read.setPrev_site("?tab=read" + (this.site.equals("1") ? "" : "&amp;site=" + (Integer.parseInt(this.site) - 1)));
+		read.setNext_site("?tab=read" + "&amp;site=" + (Integer.parseInt(this.site) + 1));
 
 		ReadMapping rm = new ReadMapping();
 		rm.setSort((this.sort.startsWith("d") ? this.sort.substring(1) : this.sort), this.sort.startsWith("d"));
+		rm.setLimit(30);
+		rm.setOffset(Integer.parseInt(this.site) * 30);
 		rm.open();
 		rm.beginTransaction();
 		List<Book> result = rm.getBooks();
+		read.setRight_arrow(rm.getNextArrow((Integer.parseInt(this.site)) * 30, 30) >= 30);
 
 		int count = 0;
 		float sum = 0.0f;

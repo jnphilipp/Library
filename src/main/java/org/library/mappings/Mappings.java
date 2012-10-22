@@ -20,6 +20,7 @@ public abstract class Mappings {
 	protected String search = "";
 	protected ArrayList<Object[]> sort = new ArrayList<Object[]>();
 	protected int limit = -1;
+	protected int offset = -1;
 
 	public void setSort(String column, boolean descend) {
 		if ( column.equals("") ||column.equals("author") ) {
@@ -42,6 +43,10 @@ public abstract class Mappings {
 		this.limit = limit;
 	}
 
+	public void setOffset(int offset) {
+		this.offset = offset;
+	}
+
 	public void open() {
 		if ( this.session == null )
 			this.session = HibernateUtil.getSessionFactory().openSession();
@@ -62,6 +67,11 @@ public abstract class Mappings {
 		}
 	}
 
+	public List sqlQuery(String query) {
+		return this.session.createSQLQuery(query).list();
+	}
+
 	public abstract void setSearch(String search);
 	public abstract List<Book> getBooks();
+	public abstract int getNextArrow(int nOffset, int nLimit);
 }

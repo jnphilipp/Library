@@ -14,6 +14,7 @@ import org.library.mustache.MustacheObject;
 public abstract class TemplatesObject {
 	protected String tab = "";
 	protected String sort = "";
+	protected String site = "";
 	protected String search = "";
 
 	public TemplatesObject(String tab) {
@@ -25,9 +26,16 @@ public abstract class TemplatesObject {
 		this.sort = sort;
 	}
 
-	public TemplatesObject(String tab, String sort, String search) {
+	public TemplatesObject(String tab, String sort, String site) {
 		this.tab = tab;
 		this.sort = sort;
+		this.site = site;
+	}
+
+	public TemplatesObject(String tab, String sort, String site, String search) {
+		this.tab = tab;
+		this.sort = sort;
+		this.site = site;
 		this.search = search;
 	}
 

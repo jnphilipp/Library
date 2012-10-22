@@ -13,42 +13,16 @@ import java.util.List;
  * @author J. Nathanael Philipp
  * @version 1.0
  */
-public class MustacheStatisticsTab implements MustacheObject {
-	/*private Statistics statistics;
-
-	public MustacheStatisticsTab() {
-		this.statistics = new Statistics();
-	}
-
-	public MustacheStatisticsTab(List<Line> line) {
-		this.statistics = new Statistics(line);
-	}
-
-	public Statistics getStatistics() {
-		return this.statistics;
-	}*/
+public class MustacheStatisticsContent implements MustacheObject {
+	private List<Line> lines = new ArrayList<Line>();
 
 	public void addLine(String title, String count, String sum) {
 		this.lines.add(new Line(title, count, sum));
 	}
 
-	/*public static class Statistics {*/
-		private List<Line> lines = new ArrayList<Line>();
-
-		/*public Statistics() {}
-
-		public Statistics(List<Line> lines) {
-			this.lines = lines;
-		}*/
-
-		public List<Line> getLine() {
-			return this.lines;
-		}
-
-		/*public void addLine(Line line) {
-			this.lines.add(line);
-		}
-	}*/
+	public List<Line> getLine() {
+		return this.lines;
+	}
 
 	public static class Line {
 		private String title = "";

@@ -26,8 +26,12 @@ public class TemplateBook extends TemplatesObject {
 		super(tab, sort);
 	}
 
-	public TemplateBook(String tab, String sort, String search) {
-		super(tab, sort, search);
+	public TemplateBook(String tab, String sort, String site) {
+		super(tab, sort, site);
+	}
+
+	public TemplateBook(String tab, String sort, String site, String search) {
+		super(tab, sort, site, search);
 	}
 
 	/*@Override
@@ -56,7 +60,7 @@ public class TemplateBook extends TemplatesObject {
 	}
 
 	public MustacheObject generateMustacheObject(Book book) {
-		TemplateBookOverview tbo = new TemplateBookOverview("search", this.search, this.sort);
+		TemplateBookOverview tbo = new TemplateBookOverview("search", this.sort, this.site, this.search);
 		MustacheBook mbook = new MustacheBook((MustacheBookOverview)tbo.generateMustacheObject(book), this.getLink(book.getIsbn()), book.getTitle());
 		mbook.addAuthor(Functions.getLanguage().getAuthor(book.hasCoauthors()), book.getAuthor().toString(), book.hasCoauthors(), book.getCoauthors());
 		mbook.addLine("ISBN", book.getIsbn());
@@ -77,6 +81,6 @@ public class TemplateBook extends TemplatesObject {
 	}
 
 	private String getLink(String isbn) {
-		return "?tab=" + this.tab + (search.equals("") ? "" : "&amp;search=" + this.search) + (this.sort.equals("") ? "" :  "&amp;sort=" + this.sort) + "#" + isbn;
+		return "?tab=" + this.tab + (search.equals("") ? "" : "&amp;search=" + this.search) + (this.site.equals("") ? "" : "&amp;site=" + this.site) + (this.sort.equals("") ? "" :  "&amp;sort=" + this.sort) + "#" + isbn;
 	}
 }

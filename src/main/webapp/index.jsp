@@ -25,7 +25,7 @@ request.setCharacterEncoding("UTF-8");
 response.setCharacterEncoding("UTF-8");
 Functions.setServletContext(getServletContext());
 
-String tab = "", search = "", book = "", sort = "", addURL = "", message = "";
+String tab = "", search = "", book = "", sort = "", addURL = "", message = "", site="0";
 
 if ( request.getParameter("tab") != null )
 	tab = request.getParameter("tab");
@@ -39,6 +39,9 @@ if ( request.getParameter("b") != null )
 if ( request.getParameter("sort") != null )
 	sort = request.getParameter("sort");
 
+if ( request.getParameter("site") != null )
+	site = request.getParameter("site");
+
 if ( request.getParameter("amazon") != null )
 	addURL = request.getParameter("amazon");
 
@@ -49,7 +52,7 @@ if ( request.getParameter("bookIn") != null && (request.getParameter("bookIn").e
 	book = request.getParameter("isbn");
 }
 
-TemplateSite ts = new TemplateSite(tab, book, sort, search, message, addURL);
+TemplateSite ts = new TemplateSite(tab, book, sort, site, search, message, addURL);
 out.println(ts.generateHTMLCode());
 
 %>

@@ -13,7 +13,7 @@ import org.library.Functions;
 import org.library.db.hibernate.classes.Book;
 import org.library.mappings.PurchasedMapping;
 import org.library.mustache.*;
-import org.library.templates.TemplatesTabs;
+import org.library.templates.TemplatesContent;
 import org.library.templates.objects.TemplateBook;
 import org.library.templates.objects.TemplateBookOverview;
 import org.library.templates.objects.TemplateSiteFunctions;
@@ -23,15 +23,19 @@ import org.library.templates.objects.TemplateSiteFunctions;
  * @author J. Nathanael Philipp
  * @version 1.0
  */
-public class TemplatePurchasedTab extends TemplatesTabs {
-	public TemplatePurchasedTab() {}
+public class TemplatePurchasedContent extends TemplatesContent {
+	public TemplatePurchasedContent() {}
 
-	public TemplatePurchasedTab(String book) {
+	public TemplatePurchasedContent(String book) {
 		super(book);
 	}
 
-	public TemplatePurchasedTab(String book, String sort) {
+	public TemplatePurchasedContent(String book, String sort) {
 		super(book, (sort.equals("") ? "dpurchased" : sort));
+	}
+
+	public TemplatePurchasedContent(String book, String sort, String site) {
+		super(book, (sort.equals("") ? "dpurchased" : sort), site);
 	}
 
 	@Override
@@ -46,36 +50,42 @@ public class TemplatePurchasedTab extends TemplatesTabs {
 
 	@Override
 	public MustacheObject generateMustacheObject() {
-		MustacheBookTabs library = new MustacheBookTabs();
-		TemplateSiteFunctions tsf = new TemplateSiteFunctions("purchased", this.sort);
-		TemplateBookOverview tbo = new TemplateBookOverview("purchased", this.sort);
-		TemplateBook tb = new TemplateBook("purchased", this.sort);
-		library.setTemplateSortfield((MustacheSortfield)tsf.generateMustacheObject("sortfield"));
+		MustacheBookContent purchased = new MustacheBookContent();
+		TemplateSiteFunctions tsf = new TemplateSiteFunctions("purchased", this.sort, this.site);
+		TemplateBookOverview tbo = new TemplateBookOverview("purchased", this.sort, this.site);
+		TemplateBook tb = new TemplateBook("purchased", this.sort, this.site);
+		purchased.setTemplateSortfield((MustacheSortfield)tsf.generateMustacheObject("sortfield"));
+		purchased.setLeft_arrow(!this.site.equals("0"));
+		purchased.setPrev_site("?tab=purchased" + (this.site.equals("1") ? "" : "&amp;site=" + (Integer.parseInt(this.site) - 1)));
+		purchased.setNext_site("?tab=purchased" + "&amp;site=" + (Integer.parseInt(this.site) + 1));
 
 		PurchasedMapping pm = new PurchasedMapping();
 		pm.setSort((this.sort.startsWith("d") ? this.sort.substring(1) : this.sort), this.sort.startsWith("d"));
+		pm.setLimit(30);
+		pm.setOffset(Integer.parseInt(this.site) * 30);
 		pm.open();
 		pm.beginTransaction();
 		List<Book> result = pm.getBooks();
+		purchased.setRight_arrow(pm.getNextArrow((Integer.parseInt(this.site)) * 30, 30) >= 30);
 
 		int count = 0;
 		float sum = 0.0f;
 
 		for ( Book b : (List<Book>) result ) {
 			if ( this.book.equals(b.getIsbn()) )
-				library.addBook((MustacheBook)tb.generateMustacheObject(b));
+				purchased.addBook((MustacheBook)tb.generateMustacheObject(b));
 			else
-				library.addBook((MustacheBookOverview)tbo.generateMustacheObject(b));
+				purchased.addBook((MustacheBookOverview)tbo.generateMustacheObject(b));
 
 			count++;
 			sum += b.getPrice();
 		}
 
-		library.setCount(String.valueOf(count));
-		library.setSum(String.valueOf(Functions.toHTML(Functions.format(sum))));
+		purchased.setCount(String.valueOf(count));
+		purchased.setSum(String.valueOf(Functions.toHTML(Functions.format(sum))));
 
 		pm.close();
 
-		return library;
+		return purchased;
 	}
 }

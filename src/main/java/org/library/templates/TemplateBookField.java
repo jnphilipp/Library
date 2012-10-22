@@ -18,7 +18,7 @@ import org.library.mustache.MustacheObject;
  * @author J. Nathanael Philipp
  * @version 1.0
  */
-public class TemplateBookField extends TemplatesTabs {
+public class TemplateBookField extends TemplatesContent {
 	private Book cBook = null;
 	private boolean update = true;
 
@@ -39,7 +39,7 @@ public class TemplateBookField extends TemplatesTabs {
 
 	@Override
 	public MustacheObject generateMustacheObject() {
-		MustacheBookField bookfield = new MustacheBookField(this.update ? Functions.getLanguage().getUpdate() : Functions.getLanguage().getAdd());
+		MustacheBookField bookfield = new MustacheBookField((this.update ? Functions.getLanguage().getUpdate() : Functions.getLanguage().getAdd()) + " " + Functions.getLanguage().getBook());
 
 		if ( this.update && this.cBook != null ) {
 			bookfield.addImage(Functions.getImagePath(this.cBook.getIsbn()), this.cBook.toShortString());

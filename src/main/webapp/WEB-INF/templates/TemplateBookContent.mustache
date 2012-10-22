@@ -1,0 +1,35 @@
+{{#searchfield}}
+	<div id="search_box">
+		<form action="?tab=search" method="get" accept-charset="UTF-8" autocomplete="off">
+			<input type="text" id="search" name="search" placeholder="Search ..." required />
+			<input type="hidden" name="tab" value="search" />
+			<input type="hidden" name="sort" value="author" />
+		</form>
+	</div>
+	<br /><br /><br />
+{{/searchfield}}
+<div style="float: left;">Books: {{count}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Summe: {{sum}}</div>
+{{#TemplateSortfield}}
+	{{>TemplateSortfield}}
+{{/TemplateSortfield}}
+<br /><br />
+{{#left_arrow}}
+	<div style="position: fixed; top: 50%; margin-top: -0.2em; left: -1em;"><a href="{{prev_site}}"><span class="arrow-w"></span></a></div>
+{{/left_arrow}}
+{{#right_arrow}}
+	<div style="position: fixed; top: 50%; margin-top: -0.2em; right: -1em;"><a href="{{next_site}}"><span class="arrow-e"></span></a></div>
+{{/right_arrow}}
+<div id="main_content">
+	{{#books}}
+		{{#overview}}
+			{{#TemplateBookOverview}}
+				{{>TemplateBookOverview}}
+			{{/TemplateBookOverview}}
+		{{/overview}}
+		{{^overview}}
+			{{#TemplateBook}}
+				{{>TemplateBook}}
+			{{/TemplateBook}}
+		{{/overview}}
+	{{/books}}
+</div>

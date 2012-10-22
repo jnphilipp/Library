@@ -22,6 +22,7 @@ public class Language {
 	private String author = "";
 	private String authors = "";
 	private String binding = "";
+	private String book = "";
 	private String by = "";
 	private String coauthor = "";
 	private String coauthors = "";
@@ -86,6 +87,8 @@ public class Language {
 			this.authors = value;
 		else if ( key.equals("binding") )
 			this.binding = value;
+		else if ( key.equals("book") )
+			this.book = value;
 		else if ( key.equals("by") )
 			this.by = value;
 		else if ( key.equals("coauthor") )
@@ -197,6 +200,13 @@ public class Language {
 	 */
 	public String getBinding() {
 		return this.binding;
+	}
+
+	/**
+	 * @return the book
+	 */
+	public String getBook() {
+		return this.book;
 	}
 
 	/**

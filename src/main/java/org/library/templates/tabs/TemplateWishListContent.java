@@ -13,7 +13,7 @@ import org.library.Functions;
 import org.library.db.hibernate.classes.Book;
 import org.library.mappings.WishListMapping;
 import org.library.mustache.*;
-import org.library.templates.TemplatesTabs;
+import org.library.templates.TemplatesContent;
 import org.library.templates.objects.TemplateBook;
 import org.library.templates.objects.TemplateBookOverview;
 import org.library.templates.objects.TemplateSiteFunctions;
@@ -23,15 +23,19 @@ import org.library.templates.objects.TemplateSiteFunctions;
  * @author J. Nathanael Philipp
  * @version 1.0
  */
-public class TemplateWishListTab extends TemplatesTabs {
-	public TemplateWishListTab() {}
+public class TemplateWishListContent extends TemplatesContent {
+	public TemplateWishListContent() {}
 
-	public TemplateWishListTab(String book) {
+	public TemplateWishListContent(String book) {
 		super(book);
 	}
 
-	public TemplateWishListTab(String book, String sort) {
+	public TemplateWishListContent(String book, String sort) {
 		super(book, (sort.equals("") ? "published" : sort));
+	}
+
+	public TemplateWishListContent(String book, String sort, String site) {
+		super(book, (sort.equals("") ? "published" : sort), site);
 	}
 
 	@Override
@@ -46,18 +50,23 @@ public class TemplateWishListTab extends TemplatesTabs {
 
 	@Override
 	public MustacheObject generateMustacheObject() {
-		MustacheBookTabs wishlist = new MustacheBookTabs();
+		MustacheBookContent wishlist = new MustacheBookContent();
 		TemplateSiteFunctions tsf = new TemplateSiteFunctions("wish", this.sort);
 		TemplateBookOverview tbo = new TemplateBookOverview("wish", this.sort);
 		TemplateBook tb = new TemplateBook("wish", this.sort);
-		wishlist.setTemplateSortfield((MustacheSortfield)tsf.generateMustacheObject("sortfield"));
+		//wishlist.setTemplateSortfield((MustacheSortfield)tsf.generateMustacheObject("sortfield"));
+		wishlist.setLeft_arrow(!this.site.equals("0"));
+		wishlist.setPrev_site("?tab=sub" + (this.site.equals("1") ? "" : "&amp;site=" + (Integer.parseInt(this.site) - 1)));
+		wishlist.setNext_site("?tab=sub" + "&amp;site=" + (Integer.parseInt(this.site) + 1));
 
 		WishListMapping wlm = new WishListMapping();
 		wlm.setSort((this.sort.startsWith("d") ? this.sort.substring(1) : this.sort), this.sort.startsWith("d"));
-		wlm.setLimit(100);
+		wlm.setLimit(30);
+		wlm.setOffset(Integer.parseInt(this.site) * 30);
 		wlm.open();
 		wlm.beginTransaction();
 		List<Book> result = wlm.getBooks();
+		wishlist.setRight_arrow(wlm.getNextArrow((Integer.parseInt(this.site)) * 30, 30) >= 30);
 
 		int count = 0;
 		float sum = 0.0f;

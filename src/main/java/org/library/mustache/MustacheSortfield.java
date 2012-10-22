@@ -14,150 +14,45 @@ import java.util.List;
  * @version 1.0
  */
 public class MustacheSortfield implements MustacheObject {
-	private Sortfield sortfield = null;
+	private String sort = "";
+	private List<Line> line = new ArrayList<Line>();
 
-	public MustacheSortfield(String sort) {
-		this.sortfield = new Sortfield(sort);
-	}
-
-	/**
-	 * @return the sortfield
-	 */
-	public Sortfield getSortfield() {
-		return sortfield;
-	}
-
-	public void addLine(String th, String tab, String downsort, String upsort) {
-		this.sortfield.addLine(new Line(th, tab, downsort, upsort));
-	}
-
-	public void addLine(String th, String tab, boolean down, String downsort, boolean up, String upsort) {
-		this.sortfield.addLine(new Line(th, tab, down, downsort, up, upsort));
-	}
-
-	public void addLine(String th, String tab, String search, String downsort, String upsort) {
-		this.sortfield.addLine(new Line(th, tab, search, downsort, upsort));
-	}
-
-	public void addLine(String th, String tab, boolean showsearch, String search, boolean down, String downsort, boolean up, String upsort) {
-		this.sortfield.addLine(new Line(th, tab, showsearch, search, down, downsort, up, upsort));
-	}
-
-	public static class Sortfield {
-		private String sort = "";
-		private List<Line> line = new ArrayList<Line>();
-
-		public Sortfield(String sort) {
+		public MustacheSortfield(String sort) {
 			this.sort = sort;
 		}
 
-		/**
-		 * @return the sort
-		 */
-		public String getSort() {
-			return sort;
-		}
+	public void addLine(String link_title, String href_down, String href_up, boolean down, boolean up) {
+		this.line.add(new Line(link_title, href_down, href_up, down, up));
+	}
 
-		/**
-		 * @return the line
-		 */
-		public List<Line> getLine() {
-			return line;
-		}
+	public String getSort() {
+		return this.sort;
+	}
 
-		public void addLine(Line line) {
-			this.line.add(line);
-		}
+	public List<Line> getLine() {
+		return this.line;
 	}
 
 	public static class Line {
-		private String th = "";
-		private String tab = "";
-		private boolean showsearch = false;
-		private String search = "";
+		private String link_title;
+		private String href_down = "";
+		private String href_up = "";
 		private boolean down = false;
-		private String downsort = "";
 		private boolean up = false;
-		private String upsort = "";
 
-		public Line(String th, String tab, String downsort, String upsort) {
-			this.th = th;
-			this.tab = tab;
-			this.down = !downsort.equals("");
-			this.downsort = downsort;
-			this.up = !upsort.equals("");
-			this.upsort = upsort;
-		}
-
-		public Line(String th, String tab, boolean down, String downsort, boolean up, String upsort) {
-			this.th = th;
-			this.tab = tab;
-			this.downsort = downsort;
-			this.upsort = upsort;
-		}
-
-		public Line(String th, String tab, String search, String downsort, String upsort) {
-			this.th = th;
-			this.tab = tab;
-			this.showsearch = !search.equals("");
-			this.search = search;
-			this.down = !downsort.equals("");
-			this.downsort = downsort;
-			this.up = !upsort.equals("");
-			this.upsort = upsort;
-		}
-
-		public Line(String th, String tab, boolean showsearch, String search, boolean down, String downsort, boolean up, String upsort) {
-			this.th = th;
-			this.tab = tab;
-			this.showsearch = showsearch;
-			this.search = search;
+		public Line(String link_title, String href_down, String href_up, boolean down, boolean up) {
+			this.link_title = link_title;
+			this.href_down = href_down;
+			this.href_up = href_up;
 			this.down = down;
-			this.downsort = downsort;
 			this.up = up;
-			this.upsort = upsort;
-		}
-
-		/**
-		 * @return the th
-		 */
-		public String getTh() {
-			return th;
-		}
-
-		/**
-		 * @return the tab
-		 */
-		public String getTab() {
-			return tab;
-		}
-
-		/**
-		 * @return the showsearch
-		 */
-		public boolean isShowsearch() {
-			return showsearch;
-		}
-
-		/**
-		 * @return the search
-		 */
-		public String getSearch() {
-			return search;
 		}
 
 		/**
 		 * @return the down
-		 */
+		 **/
 		public boolean isDown() {
 			return down;
-		}
-
-		/**
-		 * @return the downsort
-		 */
-		public String getDownsort() {
-			return downsort;
 		}
 
 		/**
@@ -168,10 +63,24 @@ public class MustacheSortfield implements MustacheObject {
 		}
 
 		/**
-		 * @return the upsort
+		 * @return the link_title
 		 */
-		public String getUpsort() {
-			return upsort;
+		public String getLink_title() {
+			return this.link_title;
+		}
+
+		/**
+		 * @return the href_down
+		 */
+		public String getHref_down() {
+			return this.href_down;
+		}
+
+		/**
+		 * @return the href_up
+		 */
+		public String getHref_up() {
+			return this.href_up;
 		}
 	}
 }

@@ -7,46 +7,35 @@ package org.library.templates.tabs;
 
 import com.github.mustachejava.DefaultMustacheFactory;
 import com.github.mustachejava.Mustache;
-import java.io.IOException;
 import java.io.StringWriter;
-import java.net.MalformedURLException;
+import java.util.List;
 import org.library.Functions;
 import org.library.db.hibernate.classes.Book;
-import org.library.html.sites.HTMLAmazon_de;
-import org.library.mustache.MustacheAddUpdateTab;
+import org.library.mappings.UpdateMapping;
+import org.library.mustache.MustacheAddUpdateContent;
 import org.library.mustache.MustacheBookField;
+import org.library.mustache.MustacheBookContent;
 import org.library.mustache.MustacheObject;
 import org.library.templates.TemplateBookField;
-import org.library.templates.TemplatesTabs;
+import org.library.templates.TemplatesContent;
 
 /**
  *
  * @author J. Nathanael Philipp
  * @version 1.0
  */
-public class TemplateAddTab extends TemplatesTabs {
-	private Book cBook = null;
+public class TemplateUpdateContent extends TemplatesContent {
+	public TemplateUpdateContent() {}
 
-	public TemplateAddTab() {}
-
-	public TemplateAddTab(String amazon) throws MalformedURLException, IOException {
-		this.fetch(amazon);
-	}
-
-	public final void fetch(String link) throws MalformedURLException, IOException {
-		if ( link.equals("") )
-			return;
-
-		HTMLAmazon_de html = new HTMLAmazon_de();
-		html.fetch(link);
-		this.cBook = html.getBook();
+	public TemplateUpdateContent(String book) {
+		super(book);
 	}
 
 	@Override
 	public String generateHTMLCode() {
 		Mustache mustache = new DefaultMustacheFactory(Functions.getMustacheTemplateDirectory()).compile("TemplateAddUpdateTab.mustache");
 		StringWriter writer = new StringWriter();
-		mustache.execute(writer, this.generateMustacheObject());
+		mustache.execute(writer, (MustacheBookContent)this.generateMustacheObject());
 		writer.flush();
 
 		return writer.toString();
@@ -54,6 +43,19 @@ public class TemplateAddTab extends TemplatesTabs {
 
 	@Override
 	public MustacheObject generateMustacheObject() {
-		return new MustacheAddUpdateTab(Functions.getLanguage().getFetch(), (MustacheBookField)new TemplateBookField(this.cBook, false).generateMustacheObject());
+		MustacheAddUpdateContent update = new MustacheAddUpdateContent();
+
+		UpdateMapping um = new UpdateMapping();
+		um.open();
+		um.beginTransaction();
+
+		um.setSearch(this.book);
+		List<Book> result = um.getBooks();
+
+		update.setTemplateBookField((MustacheBookField)new TemplateBookField(result.get(0), true).generateMustacheObject());
+
+		um.close();
+
+		return update;
 	}
 }

@@ -1,0 +1,15 @@
+<div id="main_content">
+	{{#amazon}}
+		<div id="amazon_box">
+			<form action="?tab=add" method="get" accept-charset="UTF-8" autocomplete="off">
+				<input type="text" id="amazon" name="amazon" placeholder="Amazon URL ..." required />
+				<input type="hidden" name="tab" value="add" />
+				<button type="submit">{{button}}</button>
+			</form>
+		</div>
+		<br /><br />
+	{{/amazon}}
+	{{#TemplateBookField}}
+		{{>TemplateBookField}}
+	{{/TemplateBookField}}
+</div>

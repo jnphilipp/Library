@@ -13,16 +13,20 @@ import java.util.List;
  * @author J. Nathanael Philipp
  * @version 1.0
  */
-public class MustacheBookTabs implements MustacheObject {
+public class MustacheBookContent implements MustacheObject {
 	private Searchfield searchfield = null;
 	private String count = "";
 	private String sum = "";
 	private MustacheSortfield templateSortfield = null;
+	private boolean left_arrow = false;
+	private boolean right_arrow = false;
+	private String next_site = "";
+	private String prev_site = "";
 	private List<Books> books = new ArrayList<Books>();
 
-	public MustacheBookTabs() {}
+	public MustacheBookContent() {}
 
-	public MustacheBookTabs(String legend, String button) {
+	public MustacheBookContent(String legend, String button) {
 		this.searchfield = new Searchfield(legend, button);
 	}
 
@@ -73,6 +77,62 @@ public class MustacheBookTabs implements MustacheObject {
 	 */
 	public void setTemplateSortfield(MustacheSortfield templateSortfield) {
 		this.templateSortfield = templateSortfield;
+	}
+
+	/**
+	 * @return the left_arrow
+	 */
+	public boolean getLeft_arrow() {
+		return this.left_arrow;
+	}
+
+	/**
+	 * @param left_arrow the left_arrow to set
+	 */
+	public void setLeft_arrow(boolean left_arrow) {
+		this.left_arrow = left_arrow;
+	}
+
+	/**
+	 * @return the right_arrow
+	 */
+	public boolean getRight_arrow() {
+		return this.right_arrow;
+	}
+
+	/**
+	 * @param right_arrow the right_arrow to set
+	 */
+	public void setRight_arrow(boolean right_arrow) {
+		this.right_arrow = right_arrow;
+	}
+
+	/**
+	 * @return the next_site
+	 */
+	public String getNext_site() {
+		return this.next_site;
+	}
+
+	/**
+	 * @param next_site the next_site to set
+	 */
+	public void setNext_site(String next_site) {
+		this.next_site = next_site;
+	}
+
+	/**
+	 * @return the prev_site
+	 */
+	public String getPrev_site() {
+		return this.prev_site;
+	}
+
+	/**
+	 * @param prev_site the prev_site to set
+	 */
+	public void setPrev_site(String prev_site) {
+		this.prev_site = prev_site;
 	}
 
 	/**

@@ -21,7 +21,7 @@ import org.library.templates.tabs.*;
  * @author J. Nathanael Philipp
  * @version 1.0
  */
-public class TemplateSite extends TemplatesTabs {
+public class TemplateSite extends TemplatesContent {
 	private String tab = "";
 	private String search = "";
 	private String message = "";
@@ -41,21 +41,26 @@ public class TemplateSite extends TemplatesTabs {
 		this.tab = tab;
 	}
 
-	public TemplateSite(String tab, String book, String sort, String search) {
-		super(book, sort);
+	public TemplateSite(String tab, String book, String sort, String site) {
+		super(book, sort, site);
+		this.tab = tab;
+	}
+
+	public TemplateSite(String tab, String book, String sort, String site, String search) {
+		super(book, sort, site);
 		this.tab = tab;
 		this.search = search;
 	}
 
-	public TemplateSite(String tab, String book, String sort, String search, String message) {
-		super(book, sort);
+	public TemplateSite(String tab, String book, String sort, String site, String search, String message) {
+		super(book, sort, site);
 		this.tab = tab;
 		this.search = search;
 		this.message = message;
 	}
 
-	public TemplateSite(String tab, String book, String sort, String search, String message, String addURL) {
-		super(book, sort);
+	public TemplateSite(String tab, String book, String sort, String site, String search, String message, String addURL) {
+		super(book, sort, site);
 		this.tab = tab;
 		this.search = search;
 		this.message = message;
@@ -75,38 +80,38 @@ public class TemplateSite extends TemplatesTabs {
 	@Override
 	public MustacheObject generateMustacheObject() {
 		MustacheSite site = new MustacheSite();
-		site.addTab((this.tab.equals("") || this.tab.equals("search")), "?tab=search", Functions.getLanguage().getTabSearch());
-		site.addTab(this.tab.equals("library"), "?tab=library", Functions.getLanguage().getTabLibrary());
-		site.addTab(this.tab.equals("purchased"), "?tab=purchased", Functions.getLanguage().getTabPurchased());
-		site.addTab(this.tab.equals("sub"), "?tab=sub", Functions.getLanguage().getTabSUB());
-		site.addTab(this.tab.equals("read"), "?tab=read", Functions.getLanguage().getTabRead());
-		site.addTab(this.tab.equals("wish"), "?tab=wish", Functions.getLanguage().getTabWishList());
-		site.addTab(this.tab.equals("statistics"), "?tab=statistics", Functions.getLanguage().getTabStatistics());
+		site.addNavElem((this.tab.equals("") || this.tab.equals("search")), "?tab=search", Functions.getLanguage().getTabSearch());
+		site.addNavElem(this.tab.equals("library"), "?tab=library", Functions.getLanguage().getTabLibrary());
+		site.addNavElem(this.tab.equals("purchased"), "?tab=purchased", Functions.getLanguage().getTabPurchased());
+		site.addNavElem(this.tab.equals("sub"), "?tab=sub", Functions.getLanguage().getTabSUB());
+		site.addNavElem(this.tab.equals("read"), "?tab=read", Functions.getLanguage().getTabRead());
+		site.addNavElem(this.tab.equals("wish"), "?tab=wish", Functions.getLanguage().getTabWishList());
+		site.addNavElem(this.tab.equals("statistics"), "?tab=statistics", Functions.getLanguage().getTabStatistics());
 
 		if ( !this.tab.equals("update") )
-			site.addTab(this.tab.equals("add"), "?tab=add", Functions.getLanguage().getTabAdd());
+			site.addNavElem(this.tab.equals("add"), "?tab=add", Functions.getLanguage().getTabAdd());
 
 		if ( this.tab.equals("") || this.tab.equals("search") )
-			site.addPane((MustacheBookTabs)new TemplateSearchTab(this.book, this.sort, this.search).generateMustacheObject());
+			site.addContent((MustacheBookContent)new TemplateSearchContent(this.book, this.sort, this.site, this.search).generateMustacheObject());
 		else if ( this.tab.equals("library") )
-			site.addPane((MustacheBookTabs)new TemplateLibraryTab(this.book, this.sort).generateMustacheObject());
+			site.addContent((MustacheBookContent)new TemplateLibraryContent(this.book, this.sort, this.site).generateMustacheObject());
 		else if ( this.tab.equals("purchased") )
-			site.addPane((MustacheBookTabs)new TemplatePurchasedTab(this.book, this.sort).generateMustacheObject());
+			site.addContent((MustacheBookContent)new TemplatePurchasedContent(this.book, this.sort, this.site).generateMustacheObject());
 		else if ( this.tab.equals("sub") )
-			site.addPane((MustacheBookTabs)new TemplateSUBTab(this.book, this.sort).generateMustacheObject());
+			site.addContent((MustacheBookContent)new TemplateSUBContent(this.book, this.sort, this.site).generateMustacheObject());
 		else if ( this.tab.equals("read") )
-			site.addPane((MustacheBookTabs)new TemplateReadTab(this.book, this.sort).generateMustacheObject());
+			site.addContent((MustacheBookContent)new TemplateReadContent(this.book, this.sort, this.site).generateMustacheObject());
 		else if ( this.tab.equals("wish") )
-			site.addPane((MustacheBookTabs)new TemplateWishListTab(this.book, this.sort).generateMustacheObject());
+			site.addContent((MustacheBookContent)new TemplateWishListContent(this.book, this.sort, this.site).generateMustacheObject());
 		else if ( this.tab.equals("statistics") )
-			site.addPane((MustacheStatisticsTab)new TemplateStatisticsTab().generateMustacheObject());
+			site.addContent((MustacheStatisticsContent)new TemplateStatisticsContent().generateMustacheObject());
 		else if ( this.tab.equals("update") ) {
-			site.addTab(true, "?tab=update&amp;b=" + this.book, Functions.getLanguage().getTabUpdate());
-			site.addPane((MustacheAddUpdateTab)new TemplateUpdateTab(this.book).generateMustacheObject());
+			site.addNavElem(true, "?tab=update&amp;b=" + this.book, Functions.getLanguage().getTabUpdate());
+			site.addContent((MustacheAddUpdateContent)new TemplateUpdateContent(this.book).generateMustacheObject());
 		}
 		else if ( this.tab.equals("add") )
 			try {
-				site.addPane((MustacheAddUpdateTab)new TemplateAddTab(this.addURL).generateMustacheObject());
+				site.addContent((MustacheAddUpdateContent)new TemplateAddContent(this.addURL).generateMustacheObject());
 			}
 			catch (MalformedURLException ex) {
 				Logger.getLogger(TemplateSite.class.getName()).log(Level.SEVERE, null, ex);

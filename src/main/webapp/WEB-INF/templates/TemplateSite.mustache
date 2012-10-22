@@ -37,23 +37,25 @@
 		{{#message}}
 			<article class="message"><p>{{messagetext}}</p></article>
 		{{/message}}
-		<ul id="tabs">
-			{{#tab}}
-				<li><a {{#current}}class="current"{{/current}} href="{{href}}">{{name}}</a></li>
-			{{/tab}}
-		</ul>
-		<div id="panes">
-			{{#pane}}
-				{{#TemplateBookTabs}}
-					{{>TemplateBookTabs}}
-				{{/TemplateBookTabs}}
-				{{#TemplateStatisticsTab}}
-					{{>TemplateStatisticsTab}}
-				{{/TemplateStatisticsTab}}
-				{{#TemplateAddUpdateTab}}
-					{{>TemplateAddUpdateTab}}
-				{{/TemplateAddUpdateTab}}
-			{{/pane}}
+		<nav>
+			<ul>
+				{{#navElem}}
+					<li {{#current}}class="selected"{{/current}}><a href="{{href}}">{{name}}</a></li>
+				{{/navElem}}
+			</ul>
+		</nav>
+		<div style="margin-top: 4em;">
+			{{#content}}
+				{{#TemplateBookContent}}
+					{{>TemplateBookContent}}
+				{{/TemplateBookContent}}
+				{{#TemplateStatisticsContent}}
+					{{>TemplateStatisticsContent}}
+				{{/TemplateStatisticsContent}}
+				{{#TemplateAddUpdateContent}}
+					{{>TemplateAddUpdateContent}}
+				{{/TemplateAddUpdateContent}}
+			{{/content}}
 		</div>
 	</body>
 </html>

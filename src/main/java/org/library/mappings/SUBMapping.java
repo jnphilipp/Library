@@ -54,6 +54,27 @@ public class SUBMapping extends Mappings {
 
 	@Override
 	public List<Book> getBooks() {
+		Criteria c = this.createCriteria();
+
+		if ( this.limit != -1 )
+			c.setMaxResults(this.limit);
+		if ( this.offset != -1 )
+			c.setFirstResult(this.offset);
+
+		return c.list();
+	}
+
+	@Override
+	public int getNextArrow(int nOffset, int nLimit) {
+		Criteria c = this.createCriteria();
+
+		c.setMaxResults(nLimit);
+		c.setFirstResult(nOffset);
+
+		return c.list().size();
+	}
+
+	private Criteria createCriteria() {
 		Criteria c = this.session.createCriteria(Book.class);
 		Criteria p = c.createCriteria("author");
 
@@ -66,10 +87,6 @@ public class SUBMapping extends Mappings {
 
 		c.add(Restrictions.isNull("read"));
 		c.add(Restrictions.isNotNull("purchased"));
-
-		if ( this.limit != -1 )
-			c.setMaxResults(this.limit);
-
-		return c.list();
+		return c;
 	}
 }

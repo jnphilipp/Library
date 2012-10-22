@@ -16,8 +16,8 @@ import java.util.List;
 public class MustacheSite implements MustacheObject {
 	private boolean message = false;
 	private String messagetext = "";
-	private List<Tab> tab = new ArrayList<Tab>();
-	private Pane pane = null;
+	private List<NavElem> navElem = new ArrayList<NavElem>();
+	private Content content = null;
 
 	public MustacheSite() {
 		this.message = false;
@@ -51,41 +51,41 @@ public class MustacheSite implements MustacheObject {
 	}
 
 	/**
-	 * @return the tab
+	 * @return the nav
 	 */
-	public List<Tab> getTab() {
-		return tab;
+	public List<NavElem> getNavElem() {
+		return this.navElem;
 	}
 
-	public void addTab(boolean current, String href, String name) {
-		this.tab.add(new Tab(current, href, name));
+	public void addNavElem(boolean current, String href, String name) {
+		this.navElem.add(new NavElem(current, href, name));
 	}
 
 	/**
-	 * @return the pane
+	 * @return the content
 	 */
-	public Pane getPane() {
-		return pane;
+	public Content getContent() {
+		return this.content;
 	}
 
-	public void addPane(MustacheBookTabs templateBookTabs) {
-		this.pane = new Pane(templateBookTabs);
+	public void addContent(MustacheBookContent templateBookContent) {
+		this.content = new Content(templateBookContent);
 	}
 
-	public void addPane(MustacheStatisticsTab templateStatisticsTab) {
-		this.pane = new Pane(templateStatisticsTab);
+	public void addContent(MustacheStatisticsContent templateStatisticsContent) {
+		this.content = new Content(templateStatisticsContent);
 	}
 
-	public void addPane(MustacheAddUpdateTab templateAddUpdate) {
-		this.pane = new Pane(templateAddUpdate);
+	public void addContent(MustacheAddUpdateContent templateAddUpdateContent) {
+		this.content = new Content(templateAddUpdateContent);
 	}
 
-	public static class Tab {
+	public static class NavElem {
 		private boolean current = false;
 		private String href = "";
 		private String name = "";
 
-		public Tab(boolean current, String href, String name) {
+		public NavElem(boolean current, String href, String name) {
 			this.current = current;
 			this.href = href;
 			this.name = name;
@@ -113,42 +113,42 @@ public class MustacheSite implements MustacheObject {
 		}
 	}
 
-	public static class Pane {
-		private MustacheBookTabs templateBookTabs = null;
-		private MustacheStatisticsTab templateStatisticsTab = null;
-		private MustacheAddUpdateTab templateAddUpdateTab = null;
+	public static class Content {
+		private MustacheBookContent templateBookContent = null;
+		private MustacheStatisticsContent templateStatisticsContent = null;
+		private MustacheAddUpdateContent templateAddUpdateContent = null;
 
-		public Pane(MustacheBookTabs templateBookTabs) {
-			this.templateBookTabs = templateBookTabs;
+		public Content(MustacheBookContent templateBookContent) {
+			this.templateBookContent = templateBookContent;
 		}
 
-		public Pane(MustacheStatisticsTab templateStatisticsTab) {
-			this.templateStatisticsTab = templateStatisticsTab;
+		public Content(MustacheStatisticsContent templateStatisticsContent) {
+			this.templateStatisticsContent = templateStatisticsContent;
 		}
 
-		public Pane(MustacheAddUpdateTab templateAddUpdateTab) {
-			this.templateAddUpdateTab = templateAddUpdateTab;
+		public Content(MustacheAddUpdateContent templateAddUpdateContent) {
+			this.templateAddUpdateContent = templateAddUpdateContent;
 		}
 
 		/**
-		 * @return the templateBookTabs
+		 * @return the templateBookContent
 		 */
-		public MustacheBookTabs getTemplateBookTabs() {
-			return templateBookTabs;
+		public MustacheBookContent getTemplateBookContent() {
+			return templateBookContent;
 		}
 
 		/**
 		 * @return the templateStatistics
 		 */
-		public MustacheStatisticsTab getTemplateStatisticsTab() {
-			return this.templateStatisticsTab;
+		public MustacheStatisticsContent getTemplateStatisticsContent() {
+			return this.templateStatisticsContent;
 		}
 
 		/**
-		 * @return the templateAddUpdateTab
+		 * @return the templateAddUpdateContent
 		 */
-		public MustacheAddUpdateTab getTemplateAddUpdateTab() {
-			return this.templateAddUpdateTab;
+		public MustacheAddUpdateContent getTemplateAddUpdateContent() {
+			return this.templateAddUpdateContent;
 		}
 	}
 }

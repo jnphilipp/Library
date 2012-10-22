@@ -1,20 +1,20 @@
-<fieldset class=bookIn>
+<fieldset class="bookIn" style="margin: 0 auto; {{#image}}width: 85em;{{/image}}{{^image}}width: 66em;{{/image}}">
 	<legend> {{legend}} </legend>
 	{{#image}}
-		<img src="{{path}}" height="300px" alt=" {{title}} " title=" {{title}} " />
+		<img src="{{path}}" alt=" {{title}} " title=" {{title}} " style="max-height: 300px; max-width: 220px;" />
 	{{/image}}
 	<form action="?tab=search" method="post" accept-charset="UTF-8" autocomplete="off">
 		<ul>
 			{{#field}}
 				<li>
 					<label>{{label}}:</label>
-					<input type="text" name="{{name}}" id="{{id}}" value="{{value}}" {{#required}}required{{/required}} />
+					<input type="text" name="{{name}}" id="{{id}}" value="{{value}}" placeholder="{{label}} ..." {{#required}}required{{/required}} />
 				</li>
 			{{/field}}
 			{{#button}}
 				<li>
 					<label></label>
-					<input type="submit" name="submit" value="{{button}}" />
+					<button type="submit" name="submit">{{button}}</button>
 					<input type="hidden" name="bookIn" value="{{bookin}}" />
 				</li>
 			{{/button}}

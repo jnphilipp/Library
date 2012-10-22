@@ -10,21 +10,21 @@ package org.library.mustache;
  * @author J. Nathanael Philipp
  * @version 1.0
  */
-public class MustacheAddUpdateTab implements MustacheObject {
+public class MustacheAddUpdateContent implements MustacheObject {
 	private Amazon amazon = null;
 	private MustacheBookField templateBookField = null;
 
-	public MustacheAddUpdateTab() {}
+	public MustacheAddUpdateContent() {}
 
-	public MustacheAddUpdateTab(String button) {
+	public MustacheAddUpdateContent(String button) {
 		this.amazon = new Amazon(button);
 	}
 
-	public MustacheAddUpdateTab(MustacheBookField templateBookField) {
+	public MustacheAddUpdateContent(MustacheBookField templateBookField) {
 		this.templateBookField = templateBookField;
 	}
 
-	public MustacheAddUpdateTab(String button, MustacheBookField templateBookField) {
+	public MustacheAddUpdateContent(String button, MustacheBookField templateBookField) {
 		this.amazon = new Amazon(button);
 		this.templateBookField = templateBookField;
 	}

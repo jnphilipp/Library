@@ -33,4 +33,9 @@ public class UpdateMapping extends Mappings {
 	public List<Book> getBooks() {
 		return this.session.createQuery("from Book where isbn='" + this.search + "'").list();
 	}
+
+	@Override
+	public int getNextArrow(int nOffset, int nLimit) {
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
 }

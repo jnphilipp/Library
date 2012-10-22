@@ -14,7 +14,6 @@ import org.library.db.hibernate.classes.Book;
  * @version 1.0
  */
 public class AutocompleteSearchMapping extends Mappings {
-
 	@Override
 	public void setSort(String column, boolean descend) {
 		throw new UnsupportedOperationException("Not supported yet.");
@@ -39,5 +38,10 @@ public class AutocompleteSearchMapping extends Mappings {
 
 	private String hqlQuery() {
 			return "from Buecher where titel like '%" + this.search + "%' order by " + this.sort;
+	}
+
+	@Override
+	public int getNextArrow(int nOffset, int nLimit) {
+		throw new UnsupportedOperationException("Not supported yet.");
 	}
 }
