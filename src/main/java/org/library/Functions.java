@@ -5,6 +5,7 @@
 
 package org.library;
 
+import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
 import java.text.DecimalFormat;
@@ -47,15 +48,15 @@ public class Functions {
 		if ( language == null ) {
 			try {
 				language = new Language();
-			} catch (IOException ex) {
-				Logger.getLogger(Functions.class.getName()).log(Level.SEVERE, null, ex);
+			} catch ( IOException e ) {
+				Logger.getLogger(Functions.class.getName()).log(Level.SEVERE, "Load language.", e);
 			}
 		}
 
 		return language;
 	}
 
-	public static LibraryDatabase getInstanceLibraryDatabase() {
+	/*public static LibraryDatabase getInstanceLibraryDatabase() {
 		try {
 			if ( db == null )
 				db = new LibraryDatabase();
@@ -63,24 +64,11 @@ public class Functions {
 			db.connect();
 		}
 		catch ( Exception e ) {
-			org.apache.log4j.Logger.getRootLogger().error(e);
+			Logger.getLogger(Functions.class.getName()).log(Level.SEVERE, null, e);
 		}
 
 		return db;
-	}
-
-	public static void disconnectStockAnalyserDatabase() {
-		try {
-			if ( db != null )
-				db.disconnect();
-		}
-		catch ( Exception e ) {
-			org.apache.log4j.Logger.getRootLogger().error(e);
-		}
-		finally {
-			db = null;
-		}
-	}
+	}*/
 
 	public static String getImagePath(String isbn) {
 		if ( (new File(servletContext.getRealPath("images/books/" + isbn + ".jpg"))).exists() )
@@ -174,5 +162,20 @@ public class Functions {
 		s = s.replace("¤", "&curren;");
 
 		return s;
+	}
+
+	public static void openFile(String file) {
+		try {
+			Desktop desktop = null;
+
+			if (Desktop.isDesktopSupported()) {
+				desktop = Desktop.getDesktop();
+				File f = new File(file);
+				desktop.open(f);
+			}
+		}
+		catch ( IOException e ) {
+			Logger.getLogger(Functions.class.getName()).log(Level.SEVERE, "Can't open File: " + file, e);
+		}
 	}
 }

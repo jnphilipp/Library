@@ -21,19 +21,23 @@ public class MustacheBook implements MustacheObject {
 	}
 
 	public void addAuthor(String th, String author) {
-		this.getBook().setAuthor(new Author(th, author));
+		this.book.setAuthor(new Author(th, author));
 	}
 
 	public void addAuthor(String th, String author, boolean coauthor, String coauthors) {
-		this.getBook().setAuthor(new Author(th, author, coauthor, coauthors));
+		this.book.setAuthor(new Author(th, author, coauthor, coauthors));
 	}
 
 	public void addLine(String th, String td) {
-		this.getBook().addLine(new Line(th, td));
+		this.book.addLine(new Line(th, td));
+	}
+
+	public void addEbook(String ebook, String href, String read) {
+		this.book.setEbook(new Ebook(ebook, href, read));
 	}
 
 	public void addUpdate(String isbn, String update) {
-		this.getBook().setUpdate(new Update(isbn, update));
+		this.book.setUpdate(new Update(isbn, update));
 	}
 
 	/**
@@ -51,6 +55,7 @@ public class MustacheBook implements MustacheObject {
 		private String title = "";
 		private Author author = null;
 		private List<Line> line = new ArrayList<Line>();
+		private Ebook ebook = null;
 		private Update update = null;
 
 		public Book(MustacheBookOverview templateBookOverview, String href, String title) {
@@ -119,6 +124,20 @@ public class MustacheBook implements MustacheObject {
 
 		public void addLine(Line line) {
 			this.line.add(line);
+		}
+
+		/**
+		 * @return the ebook
+		 */
+		public Ebook getEbook() {
+			return ebook;
+		}
+
+		/**
+		 * @param ebook the ebook to set
+		 */
+		public void setEbook(Ebook ebook) {
+			this.ebook = ebook;
 		}
 
 		/**
@@ -204,6 +223,39 @@ public class MustacheBook implements MustacheObject {
 		 */
 		public String getTd() {
 			return td;
+		}
+	}
+
+	public static class Ebook {
+		private String ebook = "";
+		private String href = "";
+		private String read = "";
+
+		public Ebook(String ebook, String href, String read) {
+			this.ebook = ebook;
+			this.href = href;
+			this.read = read;
+		}
+
+		/**
+		 * @return the ebook
+		 */
+		public String getEbook() {
+			return ebook;
+		}
+
+		/**
+		 * @return the href
+		 */
+		public String getHref() {
+			return href;
+		}
+
+		/**
+		 * @return the read
+		 */
+		public String getRead() {
+			return read;
 		}
 	}
 

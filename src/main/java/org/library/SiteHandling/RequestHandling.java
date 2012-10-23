@@ -67,6 +67,9 @@ public class RequestHandling {
 			if ( request.getParameter("read") != null )
 				book.setRead(Functions.stringToDate(request.getParameter("read")));
 
+			if ( request.getParameter("ebook") != null )
+				book.setPath(request.getParameter("ebook"));
+
 			session.save(book);
 			session.getTransaction().commit();
 
@@ -112,6 +115,9 @@ public class RequestHandling {
 
 			if ( request.getParameter("read") != null )
 				book.setRead(Functions.stringToDate(request.getParameter("read")));
+
+			if ( request.getParameter("ebook") != null )
+				book.setPath(request.getParameter("ebook"));
 
 			session.update(book);
 			session.getTransaction().commit();

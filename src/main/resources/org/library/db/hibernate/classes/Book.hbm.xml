@@ -12,6 +12,7 @@
 		<property name="published" type="date" column="published" not-null="true" />
 		<property name="purchased" type="date" column="purchased" not-null="false" />
 		<property name="read" type="date" column="read" not-null="false" />
+		<property name="path" type="string" column="path" not-null="false" />
 
 		<many-to-one name="language" class="Language" column="language" not-null="true" cascade="all" unique="true" />
 		<many-to-one name="binding" class="Binding" column="binding" not-null="true" cascade="all" unique="true" />

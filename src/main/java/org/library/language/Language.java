@@ -26,6 +26,7 @@ public class Language {
 	private String by = "";
 	private String coauthor = "";
 	private String coauthors = "";
+	private String ebook = "";
 	private String fetch = "";
 	private String language = "";
 	private String library_tab = "";
@@ -41,6 +42,7 @@ public class Language {
 	private String purchased_this_year = "";
 	private String purchased_this_month = "";
 	private String read = "";
+	private String read_on = "";
 	private String read_this_year = "";
 	private String read_this_month = "";
 	private String search = "";
@@ -95,6 +97,8 @@ public class Language {
 			this.coauthor = value;
 		else if ( key.equals("coauthors") )
 			this.coauthors = value;
+		else if ( key.equals("ebook") )
+			this.ebook = value;
 		else if ( key.equals("fetch") )
 			this.fetch = value;
 		else if ( key.equals("language") )
@@ -123,6 +127,8 @@ public class Language {
 			this.purchased_this_month = value;
 		else if ( key.equals("read") )
 			this.read = value;
+		else if ( key.equals("read_on") )
+			this.read_on = value;
 		else if ( key.equals("read_this_year") )
 			this.read_this_year = value;
 		else if ( key.equals("read_this_month") )
@@ -241,6 +247,13 @@ public class Language {
 	}
 
 	/**
+	 * @return the ebook
+	 */
+	public String getEbook() {
+		return this.ebook;
+	}
+
+	/**
 	 * @return the fetch
 	 */
 	public String getFetch() {
@@ -322,6 +335,13 @@ public class Language {
 	 */
 	public String getRead() {
 		return this.read;
+	}
+
+	/**
+	 * @return the read_on
+	 */
+	public String getRead_on() {
+		return this.read_on;
 	}
 
 	/**

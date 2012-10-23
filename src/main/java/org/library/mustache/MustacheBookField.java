@@ -53,6 +53,14 @@ public class MustacheBookField implements MustacheObject {
 		this.fields.add(new Field(label, name, id, value));
 	}
 
+	public void addFiled(String label, String name, String id, String value, boolean required) {
+		this.fields.add(new Field(label, name, id, value, required));
+	}
+
+	public void addFiled(String type, String label, String name, String id, String value) {
+		this.fields.add(new Field(type, label, name, id, value, false));
+	}
+
 	/**
 	 * @return the button
 	 */
@@ -101,12 +109,14 @@ public class MustacheBookField implements MustacheObject {
 
 	public static class Field {
 		private String label = "";
+		private String type = "";
 		private String name = "";
 		private String id = "";
 		private String value = "";
 		private boolean required = false;
 
 		public Field(String label, String name, String id, String value) {
+			this.type = "text";
 			this.label= label;
 			this.name = name;
 			this.id = id;
@@ -114,6 +124,16 @@ public class MustacheBookField implements MustacheObject {
 		}
 
 		public Field(String label, String name, String id, String value, boolean required) {
+			this.type = "text";
+			this.label= label;
+			this.name = name;
+			this.id = id;
+			this.value = value;
+			this.required = required;
+		}
+
+		public Field(String type, String label, String name, String id, String value, boolean required) {
+			this.type = type;
 			this.label= label;
 			this.name = name;
 			this.id = id;
@@ -126,6 +146,13 @@ public class MustacheBookField implements MustacheObject {
 		 */
 		public String getLabel() {
 			return label;
+		}
+
+		/**
+		 * @return the type
+		 */
+		public String getType() {
+			return this.type;
 		}
 
 		/**

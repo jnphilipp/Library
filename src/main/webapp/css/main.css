@@ -112,7 +112,7 @@ a.overview th { width: 9em;}
 
 article.book { display: block;
 	position: fixed;
-	top: 5em;
+	top: 4em;
 	left: 50%;
 	width: 66em;
 	margin-left: -33em;
@@ -254,7 +254,7 @@ button { overflow: visible;
 article.message { display: block;
 z-index: 10;
 position: fixed;
-top: 5em;
+top: 1em;
 left: 50%;
 margin-left: -10em;
 width: 20em;

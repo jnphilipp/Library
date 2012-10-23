@@ -80,6 +80,9 @@ public class TemplateSite extends TemplatesContent {
 	@Override
 	public MustacheObject generateMustacheObject() {
 		MustacheSite site = new MustacheSite();
+		if ( !this.message.equals("") )
+			site.setMessagetext(message);
+
 		site.addNavElem((this.tab.equals("") || this.tab.equals("search")), "?tab=search", Functions.getLanguage().getTabSearch());
 		site.addNavElem(this.tab.equals("library"), "?tab=library", Functions.getLanguage().getTabLibrary());
 		site.addNavElem(this.tab.equals("purchased"), "?tab=purchased", Functions.getLanguage().getTabPurchased());

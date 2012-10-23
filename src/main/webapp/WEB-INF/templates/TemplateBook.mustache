@@ -13,6 +13,9 @@
 			{{#line}}
 				<tr><th>{{th}}</th><td>{{td}}</td></tr>
 			{{/line}}
+			{{#ebook}}
+				<tr><th>{{ebook}}:</th><td><a href="{{href}}">{{read}}</a></td></tr>
+			{{/ebook}}
 			{{#update}}
 				<tr><th></th><td><a href="?tab=update&amp;b={{isbn}}">{{update}}</a></td></tr>
 			{{/update}}

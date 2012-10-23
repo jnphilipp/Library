@@ -28,6 +28,7 @@ public class Book {
 	private Date purchased = null;
 	private Date read = null;
 	private Set<People> coauthor = new HashSet<People>(0);
+	private String path = "";
 
 	/**
 	 * @return the ibsn
@@ -229,6 +230,20 @@ public class Book {
 
 	public boolean hasCoauthors() {
 		return !this.coauthor.isEmpty();
+	}
+
+	/**
+	 * @return the path
+	 */
+	public String getPath() {
+		return path;
+	}
+
+	/**
+	 * @param path the path to set
+	 */
+	public void setPath(String path) {
+		this.path = path;
 	}
 
 	/**

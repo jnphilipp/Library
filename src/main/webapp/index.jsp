@@ -4,16 +4,10 @@
     Author     : J. Nathanael Philipp
 --%>
 
+<%@page import="java.io.IOException"%>
+<%@page import="java.awt.Desktop"%>
 <%@page import="org.library.templates.TemplateSite"%>
-<%@page import="org.library.templates.tabs.TemplateStatisticsTab"%>
-<%@page import="org.library.templates.tabs.TemplateReadTab"%>
-<%@page import="org.library.templates.tabs.TemplateLibraryTab"%>
-<%@page import="org.library.templates.tabs.TemplateWishListTab"%>
 <%@page import="org.library.SiteHandling.RequestHandling"%>
-<%@page import="org.library.templates.tabs.TemplateAddTab"%>
-<%@page import="org.library.templates.tabs.TemplateUpdateTab"%>
-<%@page import="org.library.templates.tabs.TemplateSUBTab"%>
-<%@page import="org.library.templates.tabs.TemplateSearchTab"%>
 <%@page import="org.library.Functions"%>
 <%@page import="java.io.File"%>
 <%@page import="java.util.List"%>
@@ -25,7 +19,7 @@ request.setCharacterEncoding("UTF-8");
 response.setCharacterEncoding("UTF-8");
 Functions.setServletContext(getServletContext());
 
-String tab = "", search = "", book = "", sort = "", addURL = "", message = "", site="0";
+String tab = "", search = "", book = "", sort = "", addURL = "", message = "", site="0", path = "";
 
 if ( request.getParameter("tab") != null )
 	tab = request.getParameter("tab");
@@ -45,6 +39,9 @@ if ( request.getParameter("site") != null )
 if ( request.getParameter("amazon") != null )
 	addURL = request.getParameter("amazon");
 
+if ( request.getParameter("path") != null )
+	path = request.getParameter("path");
+
 message = RequestHandling.doRequestHandling(request, response, getServletContext());
 
 if ( request.getParameter("bookIn") != null && (request.getParameter("bookIn").equals("add") || request.getParameter("bookIn").equals("update")) ) {
@@ -55,4 +52,6 @@ if ( request.getParameter("bookIn") != null && (request.getParameter("bookIn").e
 TemplateSite ts = new TemplateSite(tab, book, sort, site, search, message, addURL);
 out.println(ts.generateHTMLCode());
 
+if ( !path.equals("") )
+	Functions.openFile(path);
 %>

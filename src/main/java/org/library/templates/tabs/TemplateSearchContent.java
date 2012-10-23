@@ -63,8 +63,8 @@ public class TemplateSearchContent extends TemplatesContent {
 		TemplateBook tb = new TemplateBook("search", this.sort, this.site, this.search);
 		mbookTabs.setTemplateSortfield((MustacheSortfield)tsf.generateMustacheObject("sortfield"));
 		mbookTabs.setLeft_arrow(!this.site.equals("0"));
-		mbookTabs.setPrev_site("?tab=search" + (this.search.equals("") ? "" : "&amp;" + this.search) + (this.site.equals("1") ? "" : "&amp;site=" + (Integer.parseInt(this.site) - 1)));
-		mbookTabs.setNext_site("?tab=search" + (this.search.equals("") ? "" : "&amp;" + this.search) + "&amp;site=" + (Integer.parseInt(this.site) + 1));
+		mbookTabs.setPrev_site("?tab=search" + (this.search.equals("") ? "" : "&amp;search=" + this.search) + (this.site.equals("1") ? "" : "&amp;site=" + (Integer.parseInt(this.site) - 1)));
+		mbookTabs.setNext_site("?tab=search" + (this.search.equals("") ? "" : "&amp;search=" + this.search) + "&amp;site=" + (Integer.parseInt(this.site) + 1));
 
 		SearchMapping sm = new SearchMapping();
 		sm.setSearch(this.search);
@@ -78,7 +78,7 @@ public class TemplateSearchContent extends TemplatesContent {
 		sm.open();
 		sm.beginTransaction();
 		List<Book> result = sm.getBooks();
-		mbookTabs.setRight_arrow(sm.getNextArrow((Integer.parseInt(this.site)) * 20, 20) >= 20);
+		mbookTabs.setRight_arrow(sm.getNextArrow(Integer.parseInt(this.site) * 20, 20) >= 20);
 
 		int count = 0;
 		float sum = 0.0f;

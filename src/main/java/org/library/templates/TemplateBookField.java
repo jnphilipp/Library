@@ -46,17 +46,18 @@ public class TemplateBookField extends TemplatesContent {
 			bookfield.addOldIsbn(this.cBook.getIsbn());
 		}
 
-		bookfield.addFiled(Functions.getLanguage().getTitle(), "title", "", (this.cBook == null ? "" : this.cBook.getTitle()));
-		bookfield.addFiled("ISBN", "isbn", "", (this.cBook == null ? "" : this.cBook.getIsbn()));
-		bookfield.addFiled(Functions.getLanguage().getAuthor(), "author", "author", (this.cBook == null ? "" : this.cBook.getAuthor().toString()));
+		bookfield.addFiled(Functions.getLanguage().getTitle(), "title", "", (this.cBook == null ? "" : this.cBook.getTitle()), true);
+		bookfield.addFiled("ISBN", "isbn", "", (this.cBook == null ? "" : this.cBook.getIsbn()), true);
+		bookfield.addFiled(Functions.getLanguage().getAuthor(), "author", "author", (this.cBook == null ? "" : this.cBook.getAuthor().toString()), true);
 		bookfield.addFiled(Functions.getLanguage().getCoauthor(), "coauthor", "coauthor", (this.cBook == null ? "" : this.cBook.getCoauthors()));
-		bookfield.addFiled(Functions.getLanguage().getPublisher(), "publisher", "publisher", (this.cBook == null ? "" : this.cBook.getPublisher().toString()));
-		bookfield.addFiled(Functions.getLanguage().getPublished(), "published", "published", (this.cBook == null ? "" : this.cBook.getPublishedToString()));
-		bookfield.addFiled(Functions.getLanguage().getBinding(), "binding", "binding", (this.cBook == null ? "" : this.cBook.getBinding().toString()));
-		bookfield.addFiled(Functions.getLanguage().getLanguage(), "language", "language", (this.cBook == null ? "" : this.cBook.getLanguage().toString()));
-		bookfield.addFiled(Functions.getLanguage().getPrice(), "price", "", (this.cBook == null ? "" : Functions.toHTML(this.cBook.getPrice(true))));
+		bookfield.addFiled(Functions.getLanguage().getPublisher(), "publisher", "publisher", (this.cBook == null ? "" : this.cBook.getPublisher().toString()), true);
+		bookfield.addFiled(Functions.getLanguage().getPublished(), "published", "published", (this.cBook == null ? "" : this.cBook.getPublishedToString()), true);
+		bookfield.addFiled(Functions.getLanguage().getBinding(), "binding", "binding", (this.cBook == null ? "" : this.cBook.getBinding().toString()), true);
+		bookfield.addFiled(Functions.getLanguage().getLanguage(), "language", "language", (this.cBook == null ? "" : this.cBook.getLanguage().toString()), true);
+		bookfield.addFiled(Functions.getLanguage().getPrice(), "price", "", (this.cBook == null ? "" : Functions.toHTML(this.cBook.getPrice(true))), true);
 		bookfield.addFiled(Functions.getLanguage().getPurchased(), "purchased", "purchased", (this.cBook == null ? "" : this.cBook.getPurchasedToString()));
 		bookfield.addFiled(Functions.getLanguage().getRead(), "read", "read", (this.cBook == null ? "" : this.cBook.getReadToString()));
+		bookfield.addFiled(Functions.getLanguage().getEbook(), "ebook", "ebook", (this.cBook == null ? "" : this.cBook.getPath()));
 
 		if ( this.update )
 			bookfield.addButton(Functions.getLanguage().getUpdate(), "update");
