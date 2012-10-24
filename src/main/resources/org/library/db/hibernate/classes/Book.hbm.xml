@@ -13,11 +13,13 @@
 		<property name="purchased" type="date" column="purchased" not-null="false" />
 		<property name="read" type="date" column="read" not-null="false" />
 		<property name="path" type="string" column="path" not-null="false" />
+		<property name="volume" type="float" column="volume" not-null="false"  />
 
 		<many-to-one name="language" class="Language" column="language" not-null="true" cascade="all" unique="true" />
 		<many-to-one name="binding" class="Binding" column="binding" not-null="true" cascade="all" unique="true" />
 		<many-to-one name="publisher" class="Publisher" column="publisher" not-null="true" cascade="all" unique="true" />
 		<many-to-one name="author" class="People" column="author" not-null="true" cascade="all" unique="true" />
+		<many-to-one name="series" class="Series" column="series" not-null="false" cascade="all" unique="true" />
 
 		<set name="coauthor" table="coauthor" cascade="all">
 			<key column="isbn" />

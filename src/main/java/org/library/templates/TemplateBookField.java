@@ -47,6 +47,8 @@ public class TemplateBookField extends TemplatesContent {
 		}
 
 		bookfield.addFiled(Functions.getLanguage().getTitle(), "title", "", (this.cBook == null ? "" : this.cBook.getTitle()), true);
+		bookfield.addFiled(Functions.getLanguage().getSeries(), "series", "series", (this.cBook == null || this.cBook.getSeries() == null ? "" : this.cBook.getSeries().toString()), false);
+		bookfield.addFiled(Functions.getLanguage().getVolume(), "volume", "", (this.cBook == null || this.cBook.getVolume() == 0.0f ? "" : String.valueOf(this.cBook.getVolume())), false);
 		bookfield.addFiled("ISBN", "isbn", "", (this.cBook == null ? "" : this.cBook.getIsbn()), true);
 		bookfield.addFiled(Functions.getLanguage().getAuthor(), "author", "author", (this.cBook == null ? "" : this.cBook.getAuthor().toString()), true);
 		bookfield.addFiled(Functions.getLanguage().getCoauthor(), "coauthor", "coauthor", (this.cBook == null ? "" : this.cBook.getCoauthors()));
@@ -57,7 +59,7 @@ public class TemplateBookField extends TemplatesContent {
 		bookfield.addFiled(Functions.getLanguage().getPrice(), "price", "", (this.cBook == null ? "" : Functions.toHTML(this.cBook.getPrice(true))), true);
 		bookfield.addFiled(Functions.getLanguage().getPurchased(), "purchased", "purchased", (this.cBook == null ? "" : this.cBook.getPurchasedToString()));
 		bookfield.addFiled(Functions.getLanguage().getRead(), "read", "read", (this.cBook == null ? "" : this.cBook.getReadToString()));
-		bookfield.addFiled(Functions.getLanguage().getEbook(), "ebook", "ebook", (this.cBook == null ? "" : this.cBook.getPath()));
+		bookfield.addFiled(Functions.getLanguage().getEbook(), "ebook", "", (this.cBook == null ? "" : this.cBook.getPath()));
 
 		if ( this.update )
 			bookfield.addButton(Functions.getLanguage().getUpdate(), "update");

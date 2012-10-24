@@ -26,11 +26,19 @@ public abstract class Mappings {
 		if ( column.equals("") ||column.equals("author") ) {
 			Object[] o = {"lastname", descend};
 			this.sort.add(o.clone());
-
 			o[0] = "firstnames";
 			this.sort.add(o.clone());
-
+			o[0] = "series";
+			this.sort.add(o.clone());
+			o[0] = "volume";
+			this.sort.add(o.clone());
 			o[0] = "purchased";
+			this.sort.add(o.clone());
+		}
+		else if ( column.equals("series") ) {
+			Object[] o = {"series", descend};
+			this.sort.add(o);
+			o[0] = "volume";
 			this.sort.add(o.clone());
 		}
 		else {

@@ -70,6 +70,8 @@ public class TemplateBook extends TemplatesObject {
 		mbook.addLine(Functions.getLanguage().getLanguage(), book.getLanguage().toString());
 		mbook.addLine(Functions.getLanguage().getPrice(), Functions.toHTML(Functions.format(book.getPrice())));
 
+		if ( book.getSeries() != null )
+			mbook.addLine(Functions.getLanguage().getSeries(), Functions.getLanguage().getVolume() + " " + book.getVolume() + " " + Functions.getLanguage().getOf() + " " + book.getSeries().toString());
 		if ( book.hasPurchased() )
 			mbook.addLine(Functions.getLanguage().getPurchased(), book.getPurchasedToString());
 		if ( book.hasRead() )

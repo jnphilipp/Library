@@ -5,20 +5,19 @@
 
 package org.library.html.sites;
 
-import org.library.db.hibernate.classes.Book;
-import org.library.db.hibernate.classes.People;
-import org.library.db.hibernate.classes.Binding;
-import org.library.db.hibernate.classes.Language;
-import org.library.db.hibernate.classes.Publisher;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.apache.log4j.Logger;
 import org.library.Functions;
+import org.library.db.hibernate.classes.Binding;
+import org.library.db.hibernate.classes.Book;
+import org.library.db.hibernate.classes.Language;
+import org.library.db.hibernate.classes.People;
+import org.library.db.hibernate.classes.Publisher;
 import org.library.html.HTML;
 
 /**
@@ -70,8 +69,9 @@ public class HTMLAmazon_de extends HTML {
 		if ( !re.isEmpty() ) {
 			try {
 				this.book.setPrice(Functions.format(re.get(0).substring(4)));
-			} catch (ParseException ex) {
-				Logger.getLogger(HTMLAmazon_de.class.getName()).log(Level.SEVERE, null, ex);
+			}
+			catch ( ParseException e ) {
+				Logger.getRootLogger().error(e);
 			}
 		}
 		else {

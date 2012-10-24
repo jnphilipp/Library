@@ -10,8 +10,7 @@ import com.github.mustachejava.Mustache;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.net.MalformedURLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.apache.log4j.Logger;
 import org.library.Functions;
 import org.library.mustache.*;
 import org.library.templates.tabs.*;
@@ -116,11 +115,11 @@ public class TemplateSite extends TemplatesContent {
 			try {
 				site.addContent((MustacheAddUpdateContent)new TemplateAddContent(this.addURL).generateMustacheObject());
 			}
-			catch (MalformedURLException ex) {
-				Logger.getLogger(TemplateSite.class.getName()).log(Level.SEVERE, null, ex);
+			catch ( MalformedURLException e ) {
+				Logger.getRootLogger().error(e);
 			}
-			catch (IOException ex) {
-				Logger.getLogger(TemplateSite.class.getName()).log(Level.SEVERE, null, ex);
+			catch ( IOException e ) {
+				Logger.getRootLogger().error(e);
 			}
 
 		return site;

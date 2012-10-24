@@ -34,6 +34,8 @@ public class Language {
 	private String message_add_2 = "";
 	private String message_update_1 = "";
 	private String message_update_2 = "";
+	private String of = "";
+	private String path = "";
 	private String price = "";
 	private String published = "";
 	private String publishedBy= "";
@@ -46,6 +48,7 @@ public class Language {
 	private String read_this_year = "";
 	private String read_this_month = "";
 	private String search = "";
+	private String series = "";
 	private String sort = "";
 	private String tab_add = "";
 	private String tab_library = "";
@@ -58,6 +61,7 @@ public class Language {
 	private String tab_wishlist = "";
 	private String title = "";
 	private String update = "";
+	private String volume = "";
 	private String which = "";
 
 	public Language() throws IOException {
@@ -111,6 +115,10 @@ public class Language {
 			this.message_add_1 = value;
 		else if ( key.equals("message_update_2") )
 			this.message_add_2 = value;
+		else if ( key.equals("of") )
+			this.of = value;
+		else if ( key.equals("path") )
+			this.path = value;
 		else if ( key.equals("price") )
 			this.price = value;
 		else if ( key.equals("published") )
@@ -135,6 +143,8 @@ public class Language {
 			this.read_this_month = value;
 		else if ( key.equals("search") )
 			this.search = value;
+		else if ( key.equals("series") )
+			this.series = value;
 		else if ( key.equals("sort") )
 			this.sort = value;
 		else if ( key.equals("tab_add") )
@@ -159,6 +169,8 @@ public class Language {
 			this.title = value;
 		else if ( key.equals("update") )
 			this.update = value;
+		else if ( key.equals("volume") )
+			this.volume = value;
 		else if ( key.equals("which") )
 			this.which = value;
 	}
@@ -282,6 +294,20 @@ public class Language {
 	}
 
 	/**
+	 * @return the of
+	 */
+	public String getOf() {
+		return this.of;
+	}
+
+	/**
+	 * @return the path
+	 */
+	public String getPath() {
+		return this.path;
+	}
+
+	/**
 	 * @return the price
 	 */
 	public String getPrice() {
@@ -366,6 +392,13 @@ public class Language {
 	}
 
 	/**
+	 * @return the series
+	 */
+	public String getSeries() {
+		return this.series;
+	}
+
+	/**
 	 * @return the sort
 	 */
 	public String getSort() {
@@ -447,6 +480,13 @@ public class Language {
 	 */
 	public String getUpdate() {
 		return this.update;
+	}
+
+	/**
+	 * @return the volume
+	 */
+	public String getVolume() {
+		return this.volume;
 	}
 
 	/**

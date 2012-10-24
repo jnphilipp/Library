@@ -18,7 +18,7 @@ import org.library.db.hibernate.classes.Book;
  * @version 1.0
  */
 public class SearchMapping extends Mappings {
-	@Override
+	/*@Override
 	public void setSort(String column, boolean descend) {
 		if ( column.equals("") || column.equals("author") ) {
 			Object[] o = {"lastname", descend};
@@ -33,11 +33,18 @@ public class SearchMapping extends Mappings {
 			o[0] = "title";
 			this.sort.add(o.clone());
 		}
+		else if ( column.equals("series") ) {
+			Object[] o = {"series", descend};
+			this.sort.add(o);
+			
+			o[0] = "volume";
+			this.sort.add(o.clone());
+		}
 		else {
 			Object[] o = {column, descend};
 			this.sort.add(o);
 		}
-	}
+	}*/
 
 	@Override
 	public void setSearch(String search) {

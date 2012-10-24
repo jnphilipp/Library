@@ -17,7 +17,7 @@ import org.library.db.hibernate.classes.Book;
  * @version 1.0
  */
 public class SUBMapping extends Mappings {
-	@Override
+	/*@Override
 	public void setSort(String column, boolean descend) {
 		if ( column.equals("") ) {
 			Object[] a = {"purchased", true};
@@ -40,7 +40,7 @@ public class SUBMapping extends Mappings {
 			Object[] o = {column, descend};
 			this.sort.add(o);
 		}
-	}
+	}*/
 
 	@Override
 	public void setSearch(String search) {

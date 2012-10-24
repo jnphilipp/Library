@@ -54,6 +54,7 @@ public class TemplateSiteFunctions extends TemplatesObject {
 		sortfield.addLine(Functions.getLanguage().getPublished(), this.getLink("dpublished"), this.getLink("published"), !this.sort.equals("dpublished"), !this.sort.equals("published"));
 		sortfield.addLine(Functions.getLanguage().getPurchased(), this.getLink("dpurchased"), this.getLink("purchased"), !this.sort.equals("dpurchased"), !this.sort.equals("purchased"));
 		sortfield.addLine(Functions.getLanguage().getRead(), this.getLink("dread"), this.getLink("read"), !this.sort.equals("dread"), !this.sort.equals("read"));
+		sortfield.addLine(Functions.getLanguage().getSeries(), this.getLink("dseries"), this.getLink("series"), !this.sort.equals("dseries"), !this.sort.equals("series"));
 
 		return sortfield;
 	}

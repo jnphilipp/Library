@@ -64,6 +64,8 @@ public class TemplateBookOverview extends TemplatesObject {
 	public MustacheObject generateMustacheObject(Book book) {
 		MustacheBookOverview bookoverview = new MustacheBookOverview(book.getIsbn(), this.getLink(book.getIsbn()), Functions.getImagePath(book.getIsbn()), book.toShortString());
 		bookoverview.addLine(Functions.getLanguage().getTitle(), book.getTitle());
+		if ( book.getSeries() != null )
+			bookoverview.addLine(Functions.getLanguage().getSeries(), Functions.getLanguage().getVolume() + " " + book.getVolume() + " " + Functions.getLanguage().getOf() + " " + book.getSeries().toString());
 		bookoverview.addLine(Functions.getLanguage().getAuthor(), book.getAuthor().toString());
 		bookoverview.addLine(Functions.getLanguage().getPublisher(), book.getPublisher().toString());
 		bookoverview.addLine(Functions.getLanguage().getPublished(), book.getPublishedToString());

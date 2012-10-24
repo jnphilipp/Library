@@ -5,22 +5,21 @@
 
 package org.library.SiteHandling;
 
-import org.library.db.hibernate.classes.Book;
-import org.library.db.hibernate.classes.People;
-import org.library.db.hibernate.classes.Language;
-import org.library.db.hibernate.classes.Binding;
-import org.library.db.hibernate.classes.Publisher;
 import java.text.ParseException;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.library.Functions;
 import org.library.db.hibernate.HibernatePeopleFunctions;
+import org.library.db.hibernate.classes.Binding;
+import org.library.db.hibernate.classes.Book;
+import org.library.db.hibernate.classes.Language;
+import org.library.db.hibernate.classes.People;
+import org.library.db.hibernate.classes.Publisher;
+import org.library.db.hibernate.classes.Series;
 import org.library.util.HibernateUtil;
 
 /**
@@ -60,6 +59,14 @@ public class RequestHandling {
 			book.setAuthor(author);
 			book.setPublisher(new Publisher(request.getParameter("publisher")));
 			book.setCoauthor(coauthor);
+
+			if ( request.getParameter("series") != null )
+				book.setSeries(request.getParameter("series").isEmpty() ? null : new Series(request.getParameter("series")));
+
+			if ( request.getParameter("volume") != null )
+				book.setVolume(request.getParameter("volume").isEmpty() ? 0.0f :  Float.parseFloat(request.getParameter("volume")));
+			else
+				book.setVolume(0.0f);
 
 			if ( request.getParameter("purchased") != null )
 				book.setPurchased(Functions.stringToDate(request.getParameter("purchased")));
@@ -109,6 +116,14 @@ public class RequestHandling {
 			book.setAuthor(author);
 			book.setPublisher(new Publisher(request.getParameter("publisher")));
 			book.setCoauthor(coauthor);
+
+			if ( request.getParameter("series") != null )
+				book.setSeries(request.getParameter("series").isEmpty() ? null : new Series(request.getParameter("series")));
+
+			if ( request.getParameter("volume") != null )
+				book.setVolume(request.getParameter("volume").isEmpty() ? 0.0f :  Float.parseFloat(request.getParameter("volume")));
+			else
+				book.setVolume(0.0f);
 
 			if ( request.getParameter("purchased") != null )
 				book.setPurchased(Functions.stringToDate(request.getParameter("purchased")));

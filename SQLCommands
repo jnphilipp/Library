@@ -2,7 +2,8 @@ CREATE TABLE publisher (name TEXT PRIMARY KEY);
 CREATE TABLE binding (binding TEXT PRIMARY KEY);
 CREATE TABLE language (name TEXT PRIMARY KEY);
 CREATE TABLE people (id SERIAL PRIMARY KEY, firstnames TEXT NOT NULL, lastname TEXT NOT NULL);
+CREATE TABLE series (name TEXT PRIMARY KEY);
 
-CREATE TABLE book (isbn TEXT PRIMARY KEY, title TEXT NOT NULL, language TEXT REFERENCES language(name), binding TEXT REFERENCES binding(binding), price REAL NOT NULL, published DATE NOT NULL, publisher TEXT REFERENCES publisher(name), author SERIAL REFERENCES people(id), purchased DATE DEFAULT NULL, read DATE DEFAULT NULL, path TEXT);
+CREATE TABLE book (isbn TEXT PRIMARY KEY, title TEXT NOT NULL, language TEXT REFERENCES language(name), binding TEXT REFERENCES binding(binding), price REAL NOT NULL, published DATE NOT NULL, publisher TEXT REFERENCES publisher(name), author SERIAL REFERENCES people(id), purchased DATE DEFAULT NULL, read DATE DEFAULT NULL, path TEXT, series TEXT REFERENCES series(name) DEFAULT NULL, volume REAL CHECK (volume >= 0) DEFAULT 0;);
 
 CREATE TABLE coauthor (isbn TEXT REFERENCES book(isbn), pid SERIAL REFERENCES people(id));

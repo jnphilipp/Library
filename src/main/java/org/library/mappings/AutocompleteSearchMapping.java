@@ -15,11 +15,6 @@ import org.library.db.hibernate.classes.Book;
  */
 public class AutocompleteSearchMapping extends Mappings {
 	@Override
-	public void setSort(String column, boolean descend) {
-		throw new UnsupportedOperationException("Not supported yet.");
-	}
-
-	@Override
 	public void setSearch(String search) {
 		this.search = search;
 	}

@@ -29,6 +29,8 @@ public class Book {
 	private Date read = null;
 	private Set<People> coauthor = new HashSet<People>(0);
 	private String path = "";
+	private Series series = null;
+	private float volume = 0.0f;
 
 	/**
 	 * @return the ibsn
@@ -244,6 +246,34 @@ public class Book {
 	 */
 	public void setPath(String path) {
 		this.path = path;
+	}
+
+	/**
+	 * @return the series
+	 */
+	public Series getSeries() {
+		return series;
+	}
+
+	/**
+	 * @param series the series to set
+	 */
+	public void setSeries(Series series) {
+		this.series = series;
+	}
+
+	/**
+	 * @return the volume
+	 */
+	public float getVolume() {
+		return volume;
+	}
+
+	/**
+	 * @param volume the volume to set
+	 */
+	public void setVolume(float volume) {
+		this.volume = volume;
 	}
 
 	/**

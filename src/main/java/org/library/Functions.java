@@ -15,9 +15,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletContext;
+import org.apache.log4j.Logger;
 import org.library.db.LibraryDatabase;
 import org.library.language.Language;
 
@@ -48,8 +47,9 @@ public class Functions {
 		if ( language == null ) {
 			try {
 				language = new Language();
-			} catch ( IOException e ) {
-				Logger.getLogger(Functions.class.getName()).log(Level.SEVERE, "Load language.", e);
+			}
+			catch ( IOException e ) {
+				Logger.getRootLogger().error("Load language.", e);
 			}
 		}
 
@@ -173,9 +173,11 @@ public class Functions {
 				File f = new File(file);
 				desktop.open(f);
 			}
+			else
+				Logger.getRootLogger().error("Desktop not supported.");
 		}
 		catch ( IOException e ) {
-			Logger.getLogger(Functions.class.getName()).log(Level.SEVERE, "Can't open File: " + file, e);
+			Logger.getRootLogger().error("Can't open File: " + file, e);
 		}
 	}
 }
