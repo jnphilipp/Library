@@ -49,7 +49,7 @@ public class Functions {
 				language = new Language();
 			}
 			catch ( IOException e ) {
-				Logger.getRootLogger().error("Load language.", e);
+				Logger.getLogger(Functions.class).error("Load language.", e);
 			}
 		}
 
@@ -164,6 +164,10 @@ public class Functions {
 		return s;
 	}
 
+	/**
+	 * Opens a file. Doesn't work when startet from maven.
+	 * @param file file to open
+	 */
 	public static void openFile(String file) {
 		try {
 			Desktop desktop = null;
@@ -177,7 +181,7 @@ public class Functions {
 				Logger.getRootLogger().error("Desktop not supported.");
 		}
 		catch ( IOException e ) {
-			Logger.getRootLogger().error("Can't open File: " + file, e);
+			Logger.getLogger(Functions.class).error("Can't open File: " + file, e);
 		}
 	}
 }

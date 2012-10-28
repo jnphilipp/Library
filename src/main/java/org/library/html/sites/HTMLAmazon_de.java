@@ -71,7 +71,7 @@ public class HTMLAmazon_de extends HTML {
 				this.book.setPrice(Functions.format(re.get(0).substring(4)));
 			}
 			catch ( ParseException e ) {
-				Logger.getRootLogger().error(e);
+				Logger.getLogger(HTMLAmazon_de.class).error(e);
 			}
 		}
 		else {

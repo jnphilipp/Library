@@ -25,10 +25,25 @@ import org.library.templates.TemplatesContent;
  * @version 1.0
  */
 public class TemplateUpdateContent extends TemplatesContent {
+	private String search = "";
+
 	public TemplateUpdateContent() {}
 
 	public TemplateUpdateContent(String book) {
 		super(book);
+	}
+
+	public TemplateUpdateContent(String book, String sort) {
+		super(book, sort);
+	}
+
+	public TemplateUpdateContent(String book, String sort, String site) {
+		super(book, sort, site);
+	}
+
+	public TemplateUpdateContent(String book, String sort, String site, String search) {
+		super(book, sort, site);
+		this.search = search;
 	}
 
 	@Override
@@ -52,7 +67,7 @@ public class TemplateUpdateContent extends TemplatesContent {
 		um.setSearch(this.book);
 		List<Book> result = um.getBooks();
 
-		update.setTemplateBookField((MustacheBookField)new TemplateBookField(result.get(0), true).generateMustacheObject());
+		update.setTemplateBookField((MustacheBookField)new TemplateBookField(sort, site, search, result.get(0), true).generateMustacheObject());
 
 		um.close();
 

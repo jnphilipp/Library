@@ -109,18 +109,19 @@ public class TemplateSite extends TemplatesContent {
 			site.addContent((MustacheStatisticsContent)new TemplateStatisticsContent().generateMustacheObject());
 		else if ( this.tab.equals("update") ) {
 			site.addNavElem(true, "?tab=update&amp;b=" + this.book, Functions.getLanguage().getTabUpdate());
-			site.addContent((MustacheAddUpdateContent)new TemplateUpdateContent(this.book).generateMustacheObject());
+			site.addContent((MustacheAddUpdateContent)new TemplateUpdateContent(this.book, this.sort, this.site, this.search).generateMustacheObject());
 		}
-		else if ( this.tab.equals("add") )
+		else if ( this.tab.equals("add") ) {
 			try {
 				site.addContent((MustacheAddUpdateContent)new TemplateAddContent(this.addURL).generateMustacheObject());
 			}
 			catch ( MalformedURLException e ) {
-				Logger.getRootLogger().error(e);
+				Logger.getLogger(TemplateSite.class).error(e);
 			}
 			catch ( IOException e ) {
-				Logger.getRootLogger().error(e);
+				Logger.getLogger(TemplateSite.class).error(e);
 			}
+		}
 
 		return site;
 	}

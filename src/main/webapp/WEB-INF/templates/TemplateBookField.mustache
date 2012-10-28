@@ -18,9 +18,9 @@
 					<input type="hidden" name="bookIn" value="{{bookin}}" />
 				</li>
 			{{/button}}
-			{{#oldIsbn}}
-				<input type="hidden" name="isbn_old" value="{{isbn}}" />
-			{{/oldIsbn}}
+			{{#hidden}}
+				<input type="hidden" name="{{name}}" value="{{value}}" />
+			{{/hidden}}
 		</ul>
 	</form>
 </fieldset>

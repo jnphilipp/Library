@@ -18,7 +18,8 @@ public class MustacheBookField implements MustacheObject {
 	private Image image = null;
 	private List<Field> fields = new ArrayList<Field>();
 	private Button button = null;
-	private OldIsbn oldIsbn = null;
+	//private OldIsbn oldIsbn = null;
+	private List<Hidden> hidden = new ArrayList<Hidden>();
 
 	public MustacheBookField(String legend) {
 		this.legend = legend;
@@ -73,15 +74,26 @@ public class MustacheBookField implements MustacheObject {
 	}
 
 	/**
-	 * @return the oldIsbn
+	 * @return the hidden
 	 */
+	public List<Hidden> getHidden() {
+		return this.hidden;
+	}
+
+	public void addHidden(String name, String value) {
+		this.hidden.add(new Hidden(name, value));
+	}
+
+	/**
+	 * @return the oldIsbn
+	 *
 	public OldIsbn getOldIsbn() {
 		return this.oldIsbn;
 	}
 
 	public void addOldIsbn(String isbn) {
 		this.oldIsbn = new OldIsbn(isbn);
-	}
+	}*/
 	
 	public static class Image {
 		private String path = "";
@@ -208,7 +220,7 @@ public class MustacheBookField implements MustacheObject {
 		}
 	}
 
-	public static class OldIsbn {
+	/*public static class OldIsbn {
 		private String isbn = "";
 
 		public OldIsbn(String isbn) {
@@ -217,9 +229,33 @@ public class MustacheBookField implements MustacheObject {
 
 		/**
 		 * @return the isbn
-		 */
+		 *
 		public String getIsbn() {
 			return isbn;
+		}
+	}*/
+
+	public static class Hidden {
+		private String name = "";
+		private String value = "";
+
+		public Hidden(String name, String value) {
+			this.name = name;
+			this.value = value;
+		}
+
+		/**
+		 * @return the name
+		 */
+		public String getName() {
+			return name;
+		}
+
+		/**
+		 * @return the value
+		 */
+		public String getValue() {
+			return value;
 		}
 	}
 }

@@ -45,7 +45,7 @@ if ( request.getParameter("path") != null )
 message = RequestHandling.doRequestHandling(request, response, getServletContext());
 
 if ( request.getParameter("bookIn") != null && (request.getParameter("bookIn").equals("add") || request.getParameter("bookIn").equals("update")) ) {
-	search = request.getParameter("isbn");
+	search = (search.equals("") ? request.getParameter("isbn") : search);
 	book = request.getParameter("isbn");
 }
 

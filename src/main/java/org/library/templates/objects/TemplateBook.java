@@ -77,9 +77,10 @@ public class TemplateBook extends TemplatesObject {
 		if ( book.hasRead() )
 			mbook.addLine(Functions.getLanguage().getRead(), book.getReadToString());
 		if ( book.getPath() != null && !book.getPath().equals("") )
-			mbook.addEbook(Functions.getLanguage().getEbook(), this.getLink(book.getIsbn(), book.getPath()), Functions.getLanguage().getRead());
+			mbook.addEbook(Functions.getLanguage().getPath(), book.getPath());
+			//mbook.addEbook(Functions.getLanguage().getPath(), this.getLink(book.getIsbn(), book.getPath()), Functions.getLanguage().getRead());
 
-		mbook.addUpdate(book.getIsbn(), Functions.getLanguage().getUpdate());
+		mbook.addUpdate(Functions.getLanguage().getUpdate(), this.getLinkUpdate(book.getIsbn()));
 
 		return mbook;
 	}
@@ -90,5 +91,9 @@ public class TemplateBook extends TemplatesObject {
 
 	private String getLink(String isbn, String path) {
 		return "?tab=" + this.tab + (search.equals("") ? "" : "&amp;search=" + this.search) + (this.site.equals("") ? "" : "&amp;site=" + this.site) + (this.sort.equals("") ? "" :  "&amp;sort=" + this.sort) + (path.equals("") ? "" : "&amp;path=" + path) + "#" + isbn;
+	}
+
+	private String getLinkUpdate(String isbn) {
+		return "?tab=update" + (search.equals("") ? "" : "&amp;search=" + this.search) + (this.site.equals("") ? "" : "&amp;site=" + this.site) + (this.sort.equals("") ? "" :  "&amp;sort=" + this.sort) + "&amp;b=" + isbn;
 	}
 }

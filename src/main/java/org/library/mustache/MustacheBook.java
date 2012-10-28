@@ -36,8 +36,12 @@ public class MustacheBook implements MustacheObject {
 		this.book.setEbook(new Ebook(ebook, href, read));
 	}
 
-	public void addUpdate(String isbn, String update) {
-		this.book.setUpdate(new Update(isbn, update));
+	public void addEbook(String ebook, String path) {
+		this.book.setEbook(new Ebook(ebook, path));
+	}
+
+	public void addUpdate(String update, String href) {
+		this.book.setUpdate(new Update(update, href));
 	}
 
 	/**
@@ -230,11 +234,17 @@ public class MustacheBook implements MustacheObject {
 		private String ebook = "";
 		private String href = "";
 		private String read = "";
+		private String path = "";
 
 		public Ebook(String ebook, String href, String read) {
 			this.ebook = ebook;
 			this.href = href;
 			this.read = read;
+		}
+
+		public Ebook(String ebook, String path) {
+			this.ebook = ebook;
+			this.path = path;
 		}
 
 		/**
@@ -257,22 +267,22 @@ public class MustacheBook implements MustacheObject {
 		public String getRead() {
 			return read;
 		}
+
+		/**
+		 * @return the path
+		 */
+		public String getPath() {
+			return this.path;
+		}
 	}
 
 	public static class Update {
-		private String isbn = "";
 		private String update = "";
+		private String href = "";
 
-		public Update(String isbn, String update) {
-			this.isbn = isbn;
+		public Update(String update, String href) {
 			this.update = update;
-		}
-
-		/**
-		 * @return the isbn
-		 */
-		public String getIsbn() {
-			return isbn;
+			this.href = href;
 		}
 
 		/**
@@ -280,6 +290,13 @@ public class MustacheBook implements MustacheObject {
 		 */
 		public String getUpdate() {
 			return update;
+		}
+
+		/**
+		 * @return the href
+		 */
+		public String getHref() {
+			return this.href;
 		}
 	}
 }

@@ -171,9 +171,9 @@ public class SearchMapping extends Mappings {
 				List isbn;
 
 				if ( this.search.contains("%") )
-					isbn = this.session.createSQLQuery("SELECT isbn FROM book WHERE author IN (SELECT id FROM people WHERE (firstnames || ' ' || lastname) LIKE :search) OR title LIKE :search OR isbn LIKE :search OR publisher LIKE :search").setString("search", this.search).list();
+					isbn = this.session.createSQLQuery("SELECT isbn FROM book WHERE author IN (SELECT id FROM people WHERE (firstnames || ' ' || lastname) LIKE :search) OR isbn IN (SELECT isbn FROM coauthor where pid IN (SELECT id FROM people WHERE (firstnames || ' ' || lastname) LIKE :search)) OR title LIKE :search OR isbn LIKE :search OR publisher LIKE :search").setString("search", this.search).list();
 				else
-					isbn = this.session.createSQLQuery("SELECT isbn FROM book WHERE author IN (SELECT id FROM people WHERE (firstnames || ' ' || lastname) = :search) OR title = :search OR isbn = :search OR publisher = :search").setString("search", this.search).list();
+					isbn = this.session.createSQLQuery("SELECT isbn FROM book WHERE author IN (SELECT id FROM people WHERE (firstnames || ' ' || lastname) = :search) OR isbn IN (SELECT isbn FROM coauthor where pid IN (SELECT id FROM people WHERE (firstnames || ' ' || lastname) = :search)) OR title = :search OR isbn = :search OR publisher = :search").setString("search", this.search).list();
 
 				if ( !isbn.isEmpty() )
 					c.add(Restrictions.in("isbn", isbn));

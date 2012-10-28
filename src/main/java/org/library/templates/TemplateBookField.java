@@ -21,10 +21,18 @@ import org.library.mustache.MustacheObject;
 public class TemplateBookField extends TemplatesContent {
 	private Book cBook = null;
 	private boolean update = true;
+	private String search = "";
 
 	public TemplateBookField(Book book, boolean update) {
 		this.update = update;
 		this.cBook = book;
+	}
+
+	public TemplateBookField(String sort, String site, String search, Book book, boolean update) {
+		super("", sort, site);
+		this.update = update;
+		this.cBook = book;
+		this.search = search;
 	}
 
 	@Override
@@ -43,8 +51,16 @@ public class TemplateBookField extends TemplatesContent {
 
 		if ( this.update && this.cBook != null ) {
 			bookfield.addImage(Functions.getImagePath(this.cBook.getIsbn()), this.cBook.toShortString());
-			bookfield.addOldIsbn(this.cBook.getIsbn());
+			//bookfield.addOldIsbn(this.cBook.getIsbn());
+			bookfield.addHidden("isbn_old", this.cBook.getIsbn());
 		}
+
+		if ( !this.site.equals("") )
+			bookfield.addHidden("site", this.site);
+		if ( !this.sort.equals("") )
+			bookfield.addHidden("sort", this.sort);
+		if ( !this.search.equals("") )
+			bookfield.addHidden("search", this.search);
 
 		bookfield.addFiled(Functions.getLanguage().getTitle(), "title", "", (this.cBook == null ? "" : this.cBook.getTitle()), true);
 		bookfield.addFiled(Functions.getLanguage().getSeries(), "series", "series", (this.cBook == null || this.cBook.getSeries() == null ? "" : this.cBook.getSeries().toString()), false);

@@ -14,10 +14,13 @@
 				<tr><th>{{th}}</th><td>{{td}}</td></tr>
 			{{/line}}
 			{{#ebook}}
-				<tr><th>{{ebook}}:</th><td><a href="{{href}}">{{read}}</a></td></tr>
+				<tr><th>{{ebook}}:</th><td>{{path}}</td></tr>
 			{{/ebook}}
+			{{#ebook_alt}}
+				<tr><th>{{ebook}}:</th><td><a href="{{href}}">{{read}}</a></td></tr>
+			{{/ebook_alt}}
 			{{#update}}
-				<tr><th></th><td><a href="?tab=update&amp;b={{isbn}}">{{update}}</a></td></tr>
+				<tr><th></th><td><a href="{{href}}">{{update}}</a></td></tr>
 			{{/update}}
 		</table>
 	</article>
