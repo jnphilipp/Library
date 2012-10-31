@@ -6,6 +6,7 @@
 package org.library.templates.objects;
 
 import org.library.Functions;
+import org.library.db.hibernate.HibernateBookFunctions;
 import org.library.db.hibernate.classes.Book;
 import org.library.mustache.MustacheBook;
 import org.library.mustache.MustacheBookOverview;
@@ -60,6 +61,8 @@ public class TemplateBook extends TemplatesObject {
 	}
 
 	public MustacheObject generateMustacheObject(Book book) {
+		HibernateBookFunctions.updateChanged(book.getIsbn());
+
 		TemplateBookOverview tbo = new TemplateBookOverview("search", this.sort, this.site, this.search);
 		MustacheBook mbook = new MustacheBook((MustacheBookOverview)tbo.generateMustacheObject(book), this.getLink(book.getIsbn()), book.getTitle());
 		mbook.addAuthor(Functions.getLanguage().getAuthor(book.hasCoauthors()), book.getAuthor().toString(), book.hasCoauthors(), book.getCoauthors());

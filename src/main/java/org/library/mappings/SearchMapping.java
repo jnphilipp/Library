@@ -18,34 +18,6 @@ import org.library.db.hibernate.classes.Book;
  * @version 1.0
  */
 public class SearchMapping extends Mappings {
-	/*@Override
-	public void setSort(String column, boolean descend) {
-		if ( column.equals("") || column.equals("author") ) {
-			Object[] o = {"lastname", descend};
-			this.sort.add(o.clone());
-
-			o[0] = "firstnames";
-			this.sort.add(o.clone());
-
-			o[0] = "published";
-			this.sort.add(o.clone());
-
-			o[0] = "title";
-			this.sort.add(o.clone());
-		}
-		else if ( column.equals("series") ) {
-			Object[] o = {"series", descend};
-			this.sort.add(o);
-			
-			o[0] = "volume";
-			this.sort.add(o.clone());
-		}
-		else {
-			Object[] o = {column, descend};
-			this.sort.add(o);
-		}
-	}*/
-
 	@Override
 	public void setSearch(String search) {
 		this.search = search;
@@ -90,8 +62,16 @@ public class SearchMapping extends Mappings {
 		}
 
 		if ( this.search.equals("") ) {
-			c.add(Restrictions.isNull("read"));
-			c.add(Restrictions.isNotNull("purchased"));
+			/*c.add(Restrictions.isNull("read"));
+			c.add(Restrictions.isNotNull("purchased"));*/
+			List isbn = this.session.createSQLQuery("SELECT isbn FROM book order by changed desc").setFirstResult(this.offset).setMaxResults(this.limit).list();
+
+			//if ( !isbn.isEmpty() )
+				c.add(Restrictions.in("isbn", isbn));
+			/*else {
+				c.add(Restrictions.isNull("read"));
+				c.add(Restrictions.isNotNull("purchased"));
+			}*/
 		}
 		else if ( this.search.startsWith("w:") ) {
 			c.add(Restrictions.isNull("purchased"));

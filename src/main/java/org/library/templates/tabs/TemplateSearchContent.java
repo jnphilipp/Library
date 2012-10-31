@@ -33,15 +33,15 @@ public class TemplateSearchContent extends TemplatesContent {
 	}
 
 	public TemplateSearchContent(String book, String sort) {
-		super(book, (sort.equals("") ? "dpurchased" : sort));
+		super(book, (sort.equals("") ? "author" : sort));
 	}
 
 	public TemplateSearchContent(String book, String sort, String site) {
-		super(book, (sort.equals("") ? "dpurchased" : sort), site);
+		super(book, (sort.equals("") ? "author" : sort), site);
 	}
 
 	public TemplateSearchContent(String book, String sort, String site, String search) {
-		super(book, (sort.equals("") ? "dpurchased" : sort), site);
+		super(book, (sort.equals("") ? "author" : sort), site);
 		this.search = search;
 	}
 
