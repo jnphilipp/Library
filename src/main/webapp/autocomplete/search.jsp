@@ -31,7 +31,7 @@ try {
 			query += "%";
 
 		if ( query.startsWith("w:") ) {
-			Query q = s.createSQLQuery("SELECT DISTINCT CAST(EXTRACT(YEAR FROM published) AS TEXT), EXTRACT(YEAR FROM published) AS year, 1 AS month FROM book WHERE CAST(EXTRACT(YEAR FROM published) AS TEXT) LIKE :search UNION ALL SELECT DISTINCT (CASE WHEN EXTRACT(MONTH FROM published) < 10 THEN '0' || EXTRACT(MONTH FROM published) ELSE CAST(EXTRACT(MONTH FROM published) AS TEXT) END || '.' || EXTRACt(YEAR FROM published)), EXTRACT(YEAR FROM published) AS year, EXTRACt(MONTH FROM published) AS month FROM book WHERE (EXTRACt(MONTH FROM published) || '.' || EXTRACT(YEAR FROM published)) LIKE :search ORDER BY year DESC, month DESC");
+			Query q = s.createSQLQuery("SELECT DISTINCT CAST(EXTRACT(YEAR FROM published) AS TEXT), EXTRACT(YEAR FROM published) AS year, 1 AS month FROM book WHERE CAST(EXTRACT(YEAR FROM published) AS TEXT) LIKE :search UNION ALL SELECT DISTINCT (CASE WHEN EXTRACT(MONTH FROM published) < 10 THEN '0' || EXTRACT(MONTH FROM published) ELSE CAST(EXTRACT(MONTH FROM published) AS TEXT) END || '.' || EXTRACt(YEAR FROM published)), EXTRACT(YEAR FROM published) AS year, EXTRACt(MONTH FROM published) AS month FROM book WHERE (EXTRACt(MONTH FROM published) || '.' || EXTRACT(YEAR FROM published)) LIKE :search ORDER BY year ASC, month ASC");
 			q.setString("search", "%" + query.substring(2));
 			List<Object[]> r = q.list();
 
@@ -39,7 +39,7 @@ try {
 				data.add("w:" + o[0]);
 		}
 		else if ( query.startsWith("p:") ) {
-			Query q = s.createSQLQuery("SELECT DISTINCT CAST(EXTRACT(YEAR FROM purchased) AS TEXT), EXTRACT(YEAR FROM purchased) AS year, 1 AS month FROM book WHERE CAST(EXTRACT(YEAR FROM purchased) AS TEXT) LIKE :search UNION ALL SELECT DISTINCT (CASE WHEN EXTRACT(MONTH FROM purchased) < 10 THEN '0' || EXTRACT(MONTH FROM purchased) ELSE CAST(EXTRACT(MONTH FROM purchased) AS TEXT) END || '.' || EXTRACt(YEAR FROM purchased)), EXTRACT(YEAR FROM purchased) AS year, EXTRACt(MONTH FROM purchased) AS month FROM book WHERE (EXTRACt(MONTH FROM purchased) || '.' || EXTRACT(YEAR FROM purchased)) LIKE :search ORDER BY year DESC, month DESC");
+			Query q = s.createSQLQuery("SELECT DISTINCT CAST(EXTRACT(YEAR FROM purchased) AS TEXT), EXTRACT(YEAR FROM purchased) AS year, 1 AS month FROM book WHERE CAST(EXTRACT(YEAR FROM purchased) AS TEXT) LIKE :search UNION ALL SELECT DISTINCT (CASE WHEN EXTRACT(MONTH FROM purchased) < 10 THEN '0' || EXTRACT(MONTH FROM purchased) ELSE CAST(EXTRACT(MONTH FROM purchased) AS TEXT) END || '.' || EXTRACt(YEAR FROM purchased)), EXTRACT(YEAR FROM purchased) AS year, EXTRACt(MONTH FROM purchased) AS month FROM book WHERE (EXTRACt(MONTH FROM purchased) || '.' || EXTRACT(YEAR FROM purchased)) LIKE :search ORDER BY year ASC, month ASC");
 			q.setString("search", "%" + query.substring(2));
 			List<Object[]> r = q.list();
 
@@ -47,7 +47,7 @@ try {
 				data.add("p:" + o[0]);
 		}
 		else if ( query.startsWith("r:") ) {
-			Query q = s.createSQLQuery("SELECT DISTINCT CAST(EXTRACT(YEAR FROM read) AS TEXT), EXTRACT(YEAR FROM read) AS year, 1 AS month FROM book WHERE CAST(EXTRACT(YEAR FROM read) AS TEXT) LIKE :search UNION ALL SELECT DISTINCT (CASE WHEN EXTRACT(MONTH FROM read) < 10 THEN '0' || EXTRACT(MONTH FROM read) ELSE CAST(EXTRACT(MONTH FROM read) AS TEXT) END || '.' || EXTRACt(YEAR FROM read)), EXTRACT(YEAR FROM read) AS year, EXTRACt(MONTH FROM read) AS month FROM book WHERE (EXTRACt(MONTH FROM read) || '.' || EXTRACT(YEAR FROM read)) LIKE :search ORDER BY year DESC, month DESC");
+			Query q = s.createSQLQuery("SELECT DISTINCT CAST(EXTRACT(YEAR FROM read) AS TEXT), EXTRACT(YEAR FROM read) AS year, 1 AS month FROM book WHERE CAST(EXTRACT(YEAR FROM read) AS TEXT) LIKE :search UNION ALL SELECT DISTINCT (CASE WHEN EXTRACT(MONTH FROM read) < 10 THEN '0' || EXTRACT(MONTH FROM read) ELSE CAST(EXTRACT(MONTH FROM read) AS TEXT) END || '.' || EXTRACt(YEAR FROM read)), EXTRACT(YEAR FROM read) AS year, EXTRACt(MONTH FROM read) AS month FROM book WHERE (EXTRACt(MONTH FROM read) || '.' || EXTRACT(YEAR FROM read)) LIKE :search ORDER BY year ASC, month ASC");
 			q.setString("search", "%" + query.substring(2));
 			List<Object[]> r = q.list();
 

@@ -38,6 +38,10 @@ public class TemplateLibraryContent extends TemplatesContent {
 		super(book, sort, site);
 	}
 
+	public TemplateLibraryContent(String book, String sort, String site, int maxBookCount) {
+		super(book, sort, site, maxBookCount);
+	}
+
 	@Override
 	public String generateHTMLCode() {
 		Mustache mustache = new DefaultMustacheFactory(Functions.getMustacheTemplateDirectory()).compile("TemplateBookTabs.mustache");
@@ -57,17 +61,17 @@ public class TemplateLibraryContent extends TemplatesContent {
 		library.setTemplateSortfield((MustacheSortfield)tsf.generateMustacheObject("sortfield"));
 		library.setLeft_arrow(!this.site.equals("0"));
 		library.setRight_arrow(true);
-		library.setPrev_site("?tab=library" + (this.site.equals("1") ? "" : "&amp;site=" + (Integer.parseInt(this.site) - 1)));
-		library.setNext_site("?tab=library&amp;site=" + (Integer.parseInt(this.site) + 1));
+		library.setPrev_site("?tab=library" + (sort.equals("") ? "" : "&amp;sort=" + this.sort) + (this.site.equals("1") ? "" : "&amp;site=" + (Integer.parseInt(this.site) - 1)));
+		library.setNext_site("?tab=library" + (sort.equals("") ? "" : "&amp;sort=" + this.sort) + "&amp;site=" + (Integer.parseInt(this.site) + 1));
 
 		LibraryMapping lm = new LibraryMapping();
 		lm.setSort((this.sort.startsWith("d") ? this.sort.substring(1) : this.sort), this.sort.startsWith("d"));
-		lm.setLimit(30);
-		lm.setOffset(Integer.parseInt(this.site) * 30);
+		lm.setLimit(this.maxBookCount);
+		lm.setOffset(Integer.parseInt(this.site) * this.maxBookCount);
 		lm.open();
 		lm.beginTransaction();
 		List<Book> result = lm.getBooks();
-		library.setRight_arrow(lm.getNextArrow((Integer.parseInt(this.site)) * 30, 30) >= 30);
+		library.setRight_arrow(result.size() >= this.maxBookCount);
 
 		int count = 0;
 		float sum = 0.0f;

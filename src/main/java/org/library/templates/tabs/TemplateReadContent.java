@@ -38,6 +38,10 @@ public class TemplateReadContent extends TemplatesContent {
 		super(book, (sort.equals("") ? "dread" : sort), site);
 	}
 
+	public TemplateReadContent(String book, String sort, String site, int maxBookCount) {
+		super(book, (sort.equals("") ? "dread" : sort), site, maxBookCount);
+	}
+
 	@Override
 	public String generateHTMLCode() {
 		Mustache mustache = new DefaultMustacheFactory(Functions.getMustacheTemplateDirectory()).compile("TemplateBookTabs.mustache");
@@ -54,19 +58,19 @@ public class TemplateReadContent extends TemplatesContent {
 		TemplateSiteFunctions tsf = new TemplateSiteFunctions("read", this.sort);
 		TemplateBookOverview tbo = new TemplateBookOverview("read", this.sort, this.site);
 		TemplateBook tb = new TemplateBook("read", this.sort, this.site);
-		//read.setTemplateSortfield((MustacheSortfield)tsf.generateMustacheObject("sortfield"));
+		read.setTemplateSortfield((MustacheSortfield)tsf.generateMustacheObject("sortfield"));
 		read.setLeft_arrow(!this.site.equals("0"));
-		read.setPrev_site("?tab=read" + (this.site.equals("1") ? "" : "&amp;site=" + (Integer.parseInt(this.site) - 1)));
-		read.setNext_site("?tab=read" + "&amp;site=" + (Integer.parseInt(this.site) + 1));
+		read.setPrev_site("?tab=read" + (sort.equals("") ? "" : "&amp;sort=" + this.sort) + (this.site.equals("1") ? "" : "&amp;site=" + (Integer.parseInt(this.site) - 1)));
+		read.setNext_site("?tab=read" + (sort.equals("") ? "" : "&amp;sort=" + this.sort) + "&amp;site=" + (Integer.parseInt(this.site) + 1));
 
 		ReadMapping rm = new ReadMapping();
 		rm.setSort((this.sort.startsWith("d") ? this.sort.substring(1) : this.sort), this.sort.startsWith("d"));
-		rm.setLimit(30);
-		rm.setOffset(Integer.parseInt(this.site) * 30);
+		rm.setLimit(this.maxBookCount);
+		rm.setOffset(Integer.parseInt(this.site) * this.maxBookCount);
 		rm.open();
 		rm.beginTransaction();
 		List<Book> result = rm.getBooks();
-		read.setRight_arrow(rm.getNextArrow((Integer.parseInt(this.site)) * 30, 30) >= 30);
+		read.setRight_arrow(result.size() >= this.maxBookCount);
 
 		int count = 0;
 		float sum = 0.0f;

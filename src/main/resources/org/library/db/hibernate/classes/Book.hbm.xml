@@ -13,7 +13,8 @@
 		<property name="purchased" type="date" column="purchased" not-null="false" />
 		<property name="read" type="date" column="read" not-null="false" />
 		<property name="path" type="string" column="path" not-null="false" />
-		<property name="volume" type="float" column="volume" not-null="false"  />
+		<property name="volume" type="float" column="volume" not-null="false" />
+		<property name="changed" type="timestamp" column="changed" not-null="false" />
 
 		<many-to-one name="language" class="Language" column="language" not-null="true" cascade="all" unique="true" />
 		<many-to-one name="binding" class="Binding" column="binding" not-null="true" cascade="all" unique="true" />

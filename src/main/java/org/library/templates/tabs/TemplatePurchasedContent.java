@@ -38,6 +38,10 @@ public class TemplatePurchasedContent extends TemplatesContent {
 		super(book, (sort.equals("") ? "dpurchased" : sort), site);
 	}
 
+	public TemplatePurchasedContent(String book, String sort, String site, int maxBookCount) {
+		super(book, (sort.equals("") ? "dpurchased" : sort), site, maxBookCount);
+	}
+
 	@Override
 	public String generateHTMLCode() {
 		Mustache mustache = new DefaultMustacheFactory(Functions.getMustacheTemplateDirectory()).compile("TemplateBookTabs.mustache");
@@ -56,17 +60,17 @@ public class TemplatePurchasedContent extends TemplatesContent {
 		TemplateBook tb = new TemplateBook("purchased", this.sort, this.site);
 		purchased.setTemplateSortfield((MustacheSortfield)tsf.generateMustacheObject("sortfield"));
 		purchased.setLeft_arrow(!this.site.equals("0"));
-		purchased.setPrev_site("?tab=purchased" + (this.site.equals("1") ? "" : "&amp;site=" + (Integer.parseInt(this.site) - 1)));
-		purchased.setNext_site("?tab=purchased" + "&amp;site=" + (Integer.parseInt(this.site) + 1));
+		purchased.setPrev_site("?tab=purchased" + (sort.equals("") ? "" : "&amp;sort=" + this.sort) + (this.site.equals("1") ? "" : "&amp;site=" + (Integer.parseInt(this.site) - 1)));
+		purchased.setNext_site("?tab=purchased" + (sort.equals("") ? "" : "&amp;sort=" + this.sort) + "&amp;site=" + (Integer.parseInt(this.site) + 1));
 
 		PurchasedMapping pm = new PurchasedMapping();
 		pm.setSort((this.sort.startsWith("d") ? this.sort.substring(1) : this.sort), this.sort.startsWith("d"));
-		pm.setLimit(30);
-		pm.setOffset(Integer.parseInt(this.site) * 30);
+		pm.setLimit(this.maxBookCount);
+		pm.setOffset(Integer.parseInt(this.site) * this.maxBookCount);
 		pm.open();
 		pm.beginTransaction();
 		List<Book> result = pm.getBooks();
-		purchased.setRight_arrow(pm.getNextArrow((Integer.parseInt(this.site)) * 30, 30) >= 30);
+		purchased.setRight_arrow(result.size() >= this.maxBookCount);
 
 		int count = 0;
 		float sum = 0.0f;

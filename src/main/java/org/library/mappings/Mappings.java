@@ -32,7 +32,7 @@ public abstract class Mappings {
 			this.sort.add(o.clone());
 			o[0] = "volume";
 			this.sort.add(o.clone());
-			o[0] = "purchased";
+			o[0] = "published";
 			this.sort.add(o.clone());
 		}
 		else if ( column.equals("series") ) {
@@ -81,5 +81,4 @@ public abstract class Mappings {
 
 	public abstract void setSearch(String search);
 	public abstract List<Book> getBooks();
-	public abstract int getNextArrow(int nOffset, int nLimit);
 }

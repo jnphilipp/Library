@@ -31,6 +31,7 @@ public class Book {
 	private String path = "";
 	private Series series = null;
 	private float volume = 0.0f;
+	private Date changed = null;
 
 	/**
 	 * @return the ibsn
@@ -274,6 +275,20 @@ public class Book {
 	 */
 	public void setVolume(float volume) {
 		this.volume = volume;
+	}
+
+	/**
+	 * @return the changed
+	 */
+	public Date getChanged() {
+		return this.changed;
+	}
+
+	/**
+	 * @param changed the changed to set
+	 */
+	public void setChanged(Date changed) {
+		this.changed = changed;
 	}
 
 	/**

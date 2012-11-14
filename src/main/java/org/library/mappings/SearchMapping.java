@@ -40,38 +40,12 @@ public class SearchMapping extends Mappings {
 		return c.list();
 	}
 
-	@Override
-	public int getNextArrow(int nOffset, int nLimit)  {
-		Criteria c = this.createCriteria();
-
-		c.setMaxResults(nLimit);
-		c.setFirstResult(nOffset);
-
-		return c.list().size();
-	}
-
 	private Criteria createCriteria() {
 		Criteria c = this.session.createCriteria(Book.class);
 		Criteria p = c.createCriteria("author");
 
-		for ( Object[] o : this.sort ) {
-			if ( o[0].equals("firstnames") || o[0].equals("lastname") )
-				p.addOrder(Boolean.valueOf(o[1].toString()) ? Order.desc(o[0].toString()) : Order.asc(o[0].toString()));
-			else
-				c.addOrder(Boolean.valueOf(o[1].toString()) ? Order.desc(o[0].toString()) : Order.asc(o[0].toString()));
-		}
-
 		if ( this.search.equals("") ) {
-			/*c.add(Restrictions.isNull("read"));
-			c.add(Restrictions.isNotNull("purchased"));*/
-			List isbn = this.session.createSQLQuery("SELECT isbn FROM book order by changed desc").setFirstResult(this.offset).setMaxResults(this.limit).list();
-
-			//if ( !isbn.isEmpty() )
-				c.add(Restrictions.in("isbn", isbn));
-			/*else {
-				c.add(Restrictions.isNull("read"));
-				c.add(Restrictions.isNotNull("purchased"));
-			}*/
+			c.addOrder(Order.desc("changed"));
 		}
 		else if ( this.search.startsWith("w:") ) {
 			c.add(Restrictions.isNull("purchased"));
@@ -163,6 +137,13 @@ public class SearchMapping extends Mappings {
 			catch ( Exception e ) {
 				Logger.getRootLogger().error(e);
 			}
+		}
+
+		for ( Object[] o : this.sort ) {
+			if ( o[0].equals("firstnames") || o[0].equals("lastname") )
+				p.addOrder(Boolean.valueOf(o[1].toString()) ? Order.desc(o[0].toString()) : Order.asc(o[0].toString()));
+			else
+				c.addOrder(Boolean.valueOf(o[1].toString()) ? Order.desc(o[0].toString()) : Order.asc(o[0].toString()));
 		}
 
 		return c;

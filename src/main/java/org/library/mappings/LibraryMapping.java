@@ -16,34 +16,6 @@ import org.library.db.hibernate.classes.Book;
  * @version 1.0
  */
 public class LibraryMapping extends Mappings {
-	/*@Override
-	public void setSort(String column, boolean descend) {
-		if ( column.equals("") || column.equals("author") ) {
-			Object[] o = {"lastname", descend};
-			this.sort.add(o.clone());
-
-			o[0] = "firstnames";
-			this.sort.add(o.clone());
-
-			o[0] = "published";
-			this.sort.add(o.clone());
-
-			o[0] = "title";
-			this.sort.add(o.clone());
-		}
-		else if ( column.equals("series") ) {
-			Object[] o = {"series", descend};
-			this.sort.add(o);
-			
-			o[0] = "volume";
-			this.sort.add(o.clone());
-		}
-		else {
-			Object[] o = {column, descend};
-			this.sort.add(o);
-		}
-	}*/
-
 	@Override
 	public void setSearch(String search) {
 		throw new UnsupportedOperationException("Not supported yet.");
@@ -64,16 +36,6 @@ public class LibraryMapping extends Mappings {
 			c.setFirstResult(this.offset);
 
 		return c.list();
-	}
-
-	@Override
-	public int getNextArrow(int nOffset, int nLimit)  {
-		Criteria c = this.createCriteria();
-
-		c.setMaxResults(nLimit);
-		c.setFirstResult(nOffset);
-
-		return c.list().size();
 	}
 
 	private Criteria createCriteria() {

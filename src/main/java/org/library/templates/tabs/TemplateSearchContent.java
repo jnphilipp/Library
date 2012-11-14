@@ -45,6 +45,11 @@ public class TemplateSearchContent extends TemplatesContent {
 		this.search = search;
 	}
 
+	public TemplateSearchContent(String book, String sort, String site, String search, int maxBookCount) {
+		super(book, (sort.equals("") ? "author" : sort), site, maxBookCount);
+		this.search = search;
+	}
+
 	@Override
 	public String generateHTMLCode() {
 		Mustache mustache = new DefaultMustacheFactory(Functions.getMustacheTemplateDirectory()).compile("TemplateBookTabs.mustache");
@@ -63,27 +68,25 @@ public class TemplateSearchContent extends TemplatesContent {
 		TemplateBook tb = new TemplateBook("search", this.sort, this.site, this.search);
 		mbookTabs.setTemplateSortfield((MustacheSortfield)tsf.generateMustacheObject("sortfield"));
 		mbookTabs.setLeft_arrow(!this.site.equals("0"));
-		mbookTabs.setPrev_site("?tab=search" + (this.search.equals("") ? "" : "&amp;search=" + this.search) + (this.site.equals("1") ? "" : "&amp;site=" + (Integer.parseInt(this.site) - 1)));
-		mbookTabs.setNext_site("?tab=search" + (this.search.equals("") ? "" : "&amp;search=" + this.search) + "&amp;site=" + (Integer.parseInt(this.site) + 1));
+		mbookTabs.setPrev_site("?tab=search" + (this.search.equals("") ? "" : "&amp;search=" + this.search) + (sort.equals("") ? "" : "&amp;sort=" + this.sort) + (this.site.equals("1") ? "" : "&amp;site=" + (Integer.parseInt(this.site) - 1)));
+		mbookTabs.setNext_site("?tab=search" + (this.search.equals("") ? "" : "&amp;search=" + this.search) + (sort.equals("") ? "" : "&amp;sort=" + this.sort) + "&amp;site=" + (Integer.parseInt(this.site) + 1));
 
 		SearchMapping sm = new SearchMapping();
 		sm.setSearch(this.search);
 		sm.setSort((this.sort.startsWith("d") ? this.sort.substring(1) : this.sort), this.sort.startsWith("d"));
 
-		if ( this.search.equals("") ) {
-			sm.setLimit(20);
-			sm.setOffset(Integer.parseInt(this.site) * 20);
-		}
+		sm.setLimit(this.maxBookCount);
+		sm.setOffset(Integer.parseInt(this.site) * this.maxBookCount);
 
 		sm.open();
 		sm.beginTransaction();
 		List<Book> result = sm.getBooks();
-		mbookTabs.setRight_arrow(sm.getNextArrow(Integer.parseInt(this.site) * 20, 20) >= 20);
+		mbookTabs.setRight_arrow(result.size() >= this.maxBookCount);
 
 		int count = 0;
 		float sum = 0.0f;
 
-		for ( Book b : (List<Book>) result ) {
+		for ( Book b : (List<Book>)result ) {
 			if ( this.book.equals(b.getIsbn()) )
 				mbookTabs.addBook((MustacheBook)tb.generateMustacheObject(b));
 			else

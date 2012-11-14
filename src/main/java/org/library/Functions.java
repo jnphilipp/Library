@@ -164,6 +164,13 @@ public class Functions {
 		return s;
 	}
 
+	public static int getMaxBookCount(String site) {
+		if ( site.equals("search") )
+			return 20;
+		else
+			return 30;
+	}
+
 	/**
 	 * Opens a file. Doesn't work when startet from maven.
 	 * @param file file to open

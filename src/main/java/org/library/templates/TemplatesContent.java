@@ -16,6 +16,7 @@ public abstract class TemplatesContent {
 	protected String book = "";
 	protected String sort = "";
 	protected String site = "0";
+	protected int maxBookCount = 0;
 
 	public TemplatesContent() {}
 
@@ -32,6 +33,13 @@ public abstract class TemplatesContent {
 		this.book = book;
 		this.sort = sort;
 		this.site = site;
+	}
+
+	public TemplatesContent(String book, String sort, String site, int maxBookCount) {
+		this.book = book;
+		this.sort = sort;
+		this.site = site;
+		this.maxBookCount = maxBookCount;
 	}
 
 	/**
@@ -74,6 +82,20 @@ public abstract class TemplatesContent {
 	 */
 	public void setSite(String site) {
 		this.site = site;
+	}
+
+	/**
+	 * @return the maxBookCount
+	 */
+	public int getMaxBookCount() {
+		return maxBookCount;
+	}
+
+	/**
+	 * @param maxBookCount the maxBookCount to set
+	 */
+	public void setMaxBookCount(int maxBookCount) {
+		this.maxBookCount = maxBookCount;
 	}
 
 	public abstract String generateHTMLCode();

@@ -34,16 +34,6 @@ public class ReadMapping extends Mappings {
 		return c.list();
 	}
 
-	@Override
-	public int getNextArrow(int nOffset, int nLimit) {
-		Criteria c = this.createCriteria();
-
-		c.setMaxResults(nLimit);
-		c.setFirstResult(nOffset);
-
-		return c.list().size();
-	}
-
 	private Criteria createCriteria() {
 		Criteria c = this.session.createCriteria(Book.class);
 		Criteria p = c.createCriteria("author");

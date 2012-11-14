@@ -89,22 +89,23 @@ public class TemplateSite extends TemplatesContent {
 		site.addNavElem(this.tab.equals("read"), "?tab=read", Functions.getLanguage().getTabRead());
 		site.addNavElem(this.tab.equals("wish"), "?tab=wish", Functions.getLanguage().getTabWishList());
 		site.addNavElem(this.tab.equals("statistics"), "?tab=statistics", Functions.getLanguage().getTabStatistics());
+		site.addNavElem(this.tab.equals("preferences"), "?tab=preferences", "Preferences");
 
 		if ( !this.tab.equals("update") )
 			site.addNavElem(this.tab.equals("add"), "?tab=add", Functions.getLanguage().getTabAdd());
 
 		if ( this.tab.equals("") || this.tab.equals("search") )
-			site.addContent((MustacheBookContent)new TemplateSearchContent(this.book, this.sort, this.site, this.search).generateMustacheObject());
+			site.addContent((MustacheBookContent)new TemplateSearchContent(this.book, this.sort, this.site, this.search, Functions.getMaxBookCount("search")).generateMustacheObject());
 		else if ( this.tab.equals("library") )
-			site.addContent((MustacheBookContent)new TemplateLibraryContent(this.book, this.sort, this.site).generateMustacheObject());
+			site.addContent((MustacheBookContent)new TemplateLibraryContent(this.book, this.sort, this.site, Functions.getMaxBookCount("library")).generateMustacheObject());
 		else if ( this.tab.equals("purchased") )
-			site.addContent((MustacheBookContent)new TemplatePurchasedContent(this.book, this.sort, this.site).generateMustacheObject());
+			site.addContent((MustacheBookContent)new TemplatePurchasedContent(this.book, this.sort, this.site, Functions.getMaxBookCount("purchased")).generateMustacheObject());
 		else if ( this.tab.equals("sub") )
-			site.addContent((MustacheBookContent)new TemplateSUBContent(this.book, this.sort, this.site).generateMustacheObject());
+			site.addContent((MustacheBookContent)new TemplateSUBContent(this.book, this.sort, this.site, Functions.getMaxBookCount("sub")).generateMustacheObject());
 		else if ( this.tab.equals("read") )
-			site.addContent((MustacheBookContent)new TemplateReadContent(this.book, this.sort, this.site).generateMustacheObject());
+			site.addContent((MustacheBookContent)new TemplateReadContent(this.book, this.sort, this.site, Functions.getMaxBookCount("read")).generateMustacheObject());
 		else if ( this.tab.equals("wish") )
-			site.addContent((MustacheBookContent)new TemplateWishListContent(this.book, this.sort, this.site).generateMustacheObject());
+			site.addContent((MustacheBookContent)new TemplateWishListContent(this.book, this.sort, this.site, Functions.getMaxBookCount("wish")).generateMustacheObject());
 		else if ( this.tab.equals("statistics") )
 			site.addContent((MustacheStatisticsContent)new TemplateStatisticsContent().generateMustacheObject());
 		else if ( this.tab.equals("update") ) {
